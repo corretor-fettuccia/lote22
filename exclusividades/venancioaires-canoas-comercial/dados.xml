@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<landpage>
+    <config>
+        <titulo>Pavilhão Comercial | EXCLUSIVIDADE | Venâncio Aires - Canoas</titulo>
+        <theme>
+            <primary>#1a365d</primary>
+            <secondary>#e2e8f0</secondary>
+            <accent>#c28100</accent>
+        </theme>
+    </config>
+    
+    <navigation>
+        <logo>Exclusividade imobiliária</logo>
+        <links>
+            <link>
+                <texto>O Imóvel</texto>
+                <url>#property</url>
+            </link>
+            <link>
+                <texto>Diferenciais</texto>
+                <url>#features</url>
+            </link>
+            <link>
+                <texto>Localização</texto>
+                <url>#location</url>
+            </link>
+            <link>
+                <texto>Galeria</texto>
+                <url>#gallery</url>
+            </link>
+        </links>
+    </navigation>
+    
+    <hero>
+        <imagem>./fotos/Imagem-1.jpeg</imagem>
+        <titulo>Excelente <destaque>Pavilhão Comercial</destaque></titulo>
+        <subtitulo>Na movimentada Av. Venâncio Aires, em Canoas-RS, ideal para empresas que buscam visibilidade e alto potencial de valorização.</subtitulo>
+        <botao>
+            <texto>Agende uma visita</texto>
+            <url>#contact</url>
+        </botao>
+    </hero>
+    
+    <property>
+        <titulo>O Imóvel</titulo>
+        <imagem>./fotos/Imagem-15.jpeg</imagem>
+        <subtitulo>Espaço amplo com <destaque>estrutura versátil e pé-direito alto.</destaque></subtitulo>
+        <detalhes>
+            <detalhe>
+                <valor>159,94m²</valor>
+                <descricao>Área privativa do pavilhão</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>178,71m²</valor>
+                <descricao>Área total construída com mezanino</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>7,00m</valor>
+                <descricao>Pé-direito livre</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>Portão pendular</valor>
+                <descricao>Acesso veicular e caminhões</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>Mezanino</valor>
+                <descricao>Com vista para o salão principal</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>Estacionamento</valor>
+                <descricao>Vagas frontais para clientes</descricao>
+            </detalhe>
+        </detalhes>
+        <descricao>
+            Pavilhão em excelente estado de conservação, com mezanino, piso de basalto robusto e fachada preparada para luminoso ou outdoor. 
+            Conta com lavabo, entrada independente para clientes e sistema de exaustão eólica.
+        </descricao>
+        <caracteristicas>
+            <caracteristica>Energia trifásica</caracteristica>
+            <caracteristica>Rede de água, esgoto e internet</caracteristica>
+            <caracteristica>Estrutura metálica no telhado</caracteristica>
+            <caracteristica>Entrada independente para clientes</caracteristica>
+            <caracteristica>Lavabo</caracteristica>
+            <caracteristica>Mezanino que pode ser utilizado como ala de estoque ou administrativo</caracteristica>
+        </caracteristicas>
+    </property>
+    
+    <features>
+        <titulo>Diferenciais Exclusivos</titulo>
+        <itens>
+            <item>
+                <icone>maximize</icone>
+                <titulo>Pé-direito de 7m</titulo>
+                <descricao>Ambiente amplo e arejado, ideal para indústrias leves, depósitos ou showrooms.</descricao>
+            </item>
+            <item>
+                <icone>truck</icone>
+                <titulo>Acesso Veicular</titulo>
+                <descricao>Portão pendular permite entrada de caminhões com facilidade.</descricao>
+            </item>
+            <item>
+                <icone>map-pin</icone>
+                <titulo>Localização Estratégica</titulo>
+                <descricao>Em avenida de grande fluxo em Canoas, próximo à BR-116 e principais facilidades urbanas.</descricao>
+            </item>
+            <item>
+                <icone>zap</icone>
+                <titulo>Infraestrutura Completa</titulo>
+                <descricao>Com energia trifásica, esgoto, rede de internet e telefonia.</descricao>
+            </item>
+            <item>
+                <icone>layers</icone>
+                <titulo>Espaço para ampliação de mezanino</titulo>
+                <descricao>Permite expansão para aumentar área útil administrativa ou de estoque.</descricao>
+            </item>
+            <item>
+                <icone>users</icone>
+                <titulo>Via de fluxo intenso</titulo>
+                <descricao>Localizado em avenida de grande movimento de pedestres e veículos, garantindo visibilidade.</descricao>
+            </item>
+            <item>
+                <icone>briefcase</icone>
+                <titulo>Versatilidade de negócios</titulo>
+                <descricao>
+                    Ideal para diferentes segmentos, como:
+                    - Mecânica<br/>
+                    - Loja de autopeças<br/>
+                    - Serviços de autorizada<br/>
+                    - Distribuidora<br/>
+                    - Ferragem de materiais de construção<br/>
+                    - Venda e revenda de materiais elétricos
+                </descricao>
+            </item>
+        </itens>
+    </features>
+    
+    <location>
+        <titulo>Localização</titulo>
+        <subtitulo><destaque>Avenida de intenso movimento em Canoas-RS</destaque></subtitulo>
+        <endereco>Av. Venâncio Aires, Niterói - Canoas/RS</endereco>
+        <entorno>
+            <item>Próximo à BR-116</item>
+            <item>Faculdades e escolas</item>
+            <item>Mercados e farmácias</item>
+            <item>Agências bancárias (Caixa)</item>
+            <item>Restaurantes e posto de saúde</item>
+        </entorno>
+        <acessos>
+            <item>Fácil acesso ao metrô e terminais de ônibus</item>
+            <item>Conexão rápida com Porto Alegre</item>
+            <item>Região fora de áreas de alagamento</item>
+        </acessos>
+        <mapa>https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d472.1071404505884!2d-51.174701018750895!3d-29.944660697251756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1756781948788!5m2!1spt-BR!2sbr</mapa>
+    </location>
+    
+    <gallery>
+        <titulo>Galeria</titulo>
+        <imagens>
+            <imagem>./fotos/imagem-1.jpeg</imagem>
+            <imagem>./fotos/Imagem-15.jpeg</imagem>
+            <imagem>./fotos/Imagem-2.jpeg</imagem>
+            <imagem>./fotos/Imagem-3.jpeg</imagem>
+            <imagem>./fotos/Imagem-4.jpeg</imagem>
+            <imagem>./fotos/Imagem-5.jpeg</imagem>
+            <imagem>./fotos/Imagem-6.jpeg</imagem>
+            <imagem>./fotos/Imagem-7.jpeg</imagem>
+            <imagem>./fotos/Imagem-8.jpeg</imagem>
+            <imagem>./fotos/Imagem-9.jpeg</imagem>
+            <imagem>./fotos/Imagem-10.jpeg</imagem>
+        </imagens>
+    </gallery>
+    
+    <contact>
+        <titulo>Agende sua Visita</titulo>
+    </contact>
+    
+    <footer>
+        <empresa>
+            <nome>Corretor Fettuccia</nome>
+            <descricao>Especialista em imóveis comerciais e residenciais na região de Canoas e Porto Alegre.</descricao>
+        </empresa>
+        <contato>
+            <telefone>(51) 99811-1078</telefone>
+            <email>corretor.fettuccia@gmail.com</email>
+        </contato>
+        <social>
+            <facebook>https://www.facebook.com/roberto.fettuccia.14</facebook>
+            <instagram>https://www.instagram.com/roberto.fettuccia</instagram>
+            <linkedin>https://www.linkedin.com/in/roberto-fettuccia/</linkedin>
+            <youtube>https://www.youtube.com/@Corretor-RobertoFettuccia</youtube>
+        </social>
+        <copyright>2025 Corretor Fettuccia. Todos os direitos reservados.</copyright>
+    </footer>
+</landpage>
