@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusividades</title>
+    <title>Nossas Exclusividades</title>
     <style>
         * {
             margin: 0;
@@ -83,6 +83,7 @@
         .card h3 {
             margin-bottom: 10px;
             color: #2c3e50;
+            text-transform: capitalize;
         }
         
         .card p {
@@ -102,6 +103,57 @@
             padding: 20px;
             color: #7f8c8d;
             font-size: 0.9rem;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        #search-input {
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+        
+        #search-input:focus {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            grid-column: 1 / -1;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            grid-column: 1 / -1;
+        }
+        
+        .refresh-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #2980b9;
         }
         
         @media (max-width: 768px) {
@@ -132,8 +184,14 @@
             <p class="subtitle">Descubra nossas opções exclusivas de propriedades</p>
         </header>
         
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar exclusividades...">
+        </div>
+        
+        <button class="refresh-btn" id="refresh-btn">Atualizar Lista</button>
+        
         <div class="grid" id="exclusividades-grid">
-            <!-- O conteúdo será gerado dinamicamente pelo JavaScript -->
+            <div class="loading">Carregando exclusividades...</div>
         </div>
     </div>
     
@@ -142,38 +200,82 @@
     </footer>
 
     <script>
-        // Esta função simula a obtenção das subpastas do diretório
-        // Em um cenário real, isso seria feito com uma requisição ao servidor
-        function obterSubpastas() {
-            // Simulação das subpastas - em produção, isso viria do servidor
-            return [
-                { nome: "Casa de Luxo", caminho: "./exclusividades/casa1", cor: "#3498db" },
-                { nome: "Apartamento Premium", caminho: "./exclusividades/predio24", cor: "#e74c3c" },
-                { nome: "Cobertura Duplex", caminho: "./exclusividades/cobertura3", cor: "#2ecc71" },
-                { nome: "Mansão Clássica", caminho: "./exclusividades/mansao5", cor: "#9b59b6" },
-                { nome: "Casa de Campo", caminho: "./exclusividades/campo7", cor: "#f39c12" },
-                { nome: "Loft Industrial", caminho: "./exclusividades/loft12", cor: "#1abc9c" }
-            ];
-        }
-
-        function gerarThumbnails() {
+        // Cores para os thumbnails
+        const colors = ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f39c12', '#1abc9c', '#d35400', '#27ae60'];
+        
+        // Função para tentar detectar subpastas (simulação)
+        async function listSubfolders() {
             const grid = document.getElementById('exclusividades-grid');
-            const subpastas = obterSubpastas();
+            grid.innerHTML = '<div class="loading">Carregando exclusividades...</div>';
             
-            subpastas.forEach(subpasta => {
+            try {
+                // Esta é uma simulação - em um ambiente real, isso exigiria um backend
+                // Vamos tentar carregar um arquivo de cada pasta para verificar sua existência
+                
+                // Lista de pastas para verificar (você pode adicionar outras aqui)
+                const foldersToCheck = [
+                    'casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12',
+                    'apartamento10', 'casa2', 'sobrado8', 'studio15'
+                ];
+                
+                const existingFolders = [];
+                
+                // Verificar quais pastas existem
+                for (const folder of foldersToCheck) {
+                    try {
+                        // Tentar carregar um arquivo que provavelmente existe na pasta
+                        const response = await fetch(`./exclusividades/${folder}/index.html`, { method: 'HEAD' });
+                        if (response.status !== 404) {
+                            existingFolders.push(folder);
+                        }
+                    } catch (error) {
+                        // A pasta provavelmente não existe ou não podemos acessá-la
+                        console.log(`Pasta ${folder} não encontrada ou inacessível`);
+                    }
+                }
+                
+                // Se não encontrou pastas, usar uma lista padrão
+                if (existingFolders.length === 0) {
+                    console.log('Nenhuma pasta detectada, usando lista padrão');
+                    displayFolders(['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12']);
+                } else {
+                    displayFolders(existingFolders);
+                }
+                
+            } catch (error) {
+                console.error('Erro ao tentar detectar pastas:', error);
+                // Fallback para uma lista padrão se a detecção falhar
+                displayFolders(['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12']);
+            }
+        }
+        
+        // Função para exibir as pastas na interface
+        function displayFolders(folders) {
+            const grid = document.getElementById('exclusividades-grid');
+            
+            if (folders.length === 0) {
+                grid.innerHTML = '<div class="no-results">Nenhuma exclusividade encontrada.</div>';
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            folders.forEach((folder, index) => {
+                const colorIndex = index % colors.length;
                 const card = document.createElement('div');
                 card.className = 'card';
+                card.setAttribute('data-name', folder);
                 
-                // Gerar uma letra inicial para o ícone
-                const inicial = subpasta.nome.charAt(0);
+                // Formatar o nome para exibição
+                const displayName = folder.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                 
                 card.innerHTML = `
-                    <a href="${subpasta.caminho}">
-                        <div class="card-image" style="background-color: ${subpasta.cor}">
-                            ${inicial}
+                    <a href="./exclusividades/${folder}/">
+                        <div class="card-image" style="background-color: ${colors[colorIndex]}">
+                            ${folder.charAt(0).toUpperCase()}
                         </div>
                         <div class="card-content">
-                            <h3>${subpasta.nome}</h3>
+                            <h3>${displayName}</h3>
                             <p>Clique para explorar esta propriedade exclusiva.</p>
                         </div>
                     </a>
@@ -181,10 +283,55 @@
                 
                 grid.appendChild(card);
             });
+            
+            // Adicionar o listener de busca após renderizar os cards
+            setupSearch();
         }
-
-        // Inicializar a página quando o DOM estiver carregado
-        document.addEventListener('DOMContentLoaded', gerarThumbnails);
+        
+        // Configurar a funcionalidade de busca
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.card');
+                let hasVisible = false;
+                
+                cards.forEach(card => {
+                    const cardName = card.getAttribute('data-name').toLowerCase();
+                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                    
+                    if (cardName.includes(searchTerm) || cardTitle.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        hasVisible = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Mostrar mensagem se não houver resultados
+                const noResults = document.getElementById('no-results');
+                if (!hasVisible) {
+                    if (!noResults) {
+                        const noResultsMsg = document.createElement('div');
+                        noResultsMsg.id = 'no-results';
+                        noResultsMsg.className = 'no-results';
+                        noResultsMsg.innerHTML = '<p>Nenhuma exclusividade encontrada. Tente outros termos de busca.</p>';
+                        document.getElementById('exclusividades-grid').appendChild(noResultsMsg);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            });
+        }
+        
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            listSubfolders();
+            
+            // Botão para atualizar a lista
+            document.getElementById('refresh-btn').addEventListener('click', listSubfolders);
+        });
     </script>
 </body>
 </html>
