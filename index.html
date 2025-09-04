@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossas Exclusividades</title>
+    <title>Listagem Dinâmica de Exclusividades</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -16,22 +26,25 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
         
         header {
             text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
             border-radius: 10px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         h1 {
@@ -40,8 +53,77 @@
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .admin-panel {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .admin-panel h2 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        button {
+            padding: 12px 20px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
         
         .grid {
@@ -58,6 +140,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             cursor: pointer;
+            border: 1px solid #e0e0e0;
         }
         
         .card:hover {
@@ -67,12 +150,12 @@
         
         .card-image {
             height: 180px;
-            background-color: #3498db;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
         }
         
@@ -82,7 +165,7 @@
         
         .card h3 {
             margin-bottom: 10px;
-            color: #2c3e50;
+            color: var(--dark);
             text-transform: capitalize;
         }
         
@@ -97,63 +180,33 @@
             color: inherit;
         }
         
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .status.info {
+            background-color: #d6eaf8;
+            color: #2874a6;
+        }
+        
+        .status.warning {
+            background-color: #fdebd0;
+            color: #d35400;
+        }
+        
+        .manual-mode .card {
+            opacity: 0.8;
+        }
+        
         footer {
             text-align: center;
             margin-top: 50px;
             padding: 20px;
             color: #7f8c8d;
             font-size: 0.9rem;
-        }
-        
-        .search-container {
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        #search-input {
-            padding: 12px 20px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: box-shadow 0.3s;
-        }
-        
-        #search-input:focus {
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            grid-column: 1 / -1;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            grid-column: 1 / -1;
-        }
-        
-        .refresh-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        .refresh-btn:hover {
-            background-color: #2980b9;
         }
         
         @media (max-width: 768px) {
@@ -164,6 +217,10 @@
             h1 {
                 font-size: 2rem;
             }
+            
+            .actions {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 480px) {
@@ -172,7 +229,7 @@
             }
             
             header {
-                padding: 30px 0;
+                padding: 20px 0;
             }
         }
     </style>
@@ -184,69 +241,54 @@
             <p class="subtitle">Descubra nossas opções exclusivas de propriedades</p>
         </header>
         
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar exclusividades...">
+        <div class="status warning">
+            <p><strong>Atenção:</strong> O JavaScript do navegador não pode acessar diretamente as pastas do servidor por questões de segurança.</p>
+            <p>Use o painel abaixo para cadastrar manualmente suas pastas ou clique em "Tentar Detectar Automaticamente".</p>
         </div>
         
-        <button class="refresh-btn" id="refresh-btn">Atualizar Lista</button>
+        <div class="admin-panel">
+            <h2>Gerenciar Pastas</h2>
+            <div class="form-group">
+                <label for="folder-name">Nome da Pasta (ex: casa1, predio24):</label>
+                <input type="text" id="folder-name" placeholder="Digite o nome da pasta">
+            </div>
+            <button id="add-folder" class="btn-success">Adicionar Pasta</button>
+            
+            <div class="actions">
+                <button id="detect-folders" class="btn-warning">Tentar Detectar Automaticamente</button>
+                <button id="clear-folders">Limpar Todas as Pastas</button>
+                <button id="reset-demo">Restaurar Dados de Exemplo</button>
+            </div>
+        </div>
         
         <div class="grid" id="exclusividades-grid">
-            <div class="loading">Carregando exclusividades...</div>
+            <div class="status info">
+                Carregando pastas...
+            </div>
         </div>
     </div>
     
     <footer>
         <p>&copy; 2023 Exclusividades Imobiliárias. Todos os direitos reservados.</p>
+        <p>As pastas são armazenadas localmente no seu navegador.</p>
     </footer>
 
     <script>
         // Cores para os thumbnails
         const colors = ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f39c12', '#1abc9c', '#d35400', '#27ae60'];
         
-        // Função para tentar detectar subpastas (simulação)
-        async function listSubfolders() {
-            const grid = document.getElementById('exclusividades-grid');
-            grid.innerHTML = '<div class="loading">Carregando exclusividades...</div>';
-            
-            try {
-                // Esta é uma simulação - em um ambiente real, isso exigiria um backend
-                // Vamos tentar carregar um arquivo de cada pasta para verificar sua existência
-                
-                // Lista de pastas para verificar (você pode adicionar outras aqui)
-                const foldersToCheck = [
-                    'casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12',
-                    'apartamento10', 'casa2', 'sobrado8', 'studio15'
-                ];
-                
-                const existingFolders = [];
-                
-                // Verificar quais pastas existem
-                for (const folder of foldersToCheck) {
-                    try {
-                        // Tentar carregar um arquivo que provavelmente existe na pasta
-                        const response = await fetch(`./exclusividades/${folder}/index.html`, { method: 'HEAD' });
-                        if (response.status !== 404) {
-                            existingFolders.push(folder);
-                        }
-                    } catch (error) {
-                        // A pasta provavelmente não existe ou não podemos acessá-la
-                        console.log(`Pasta ${folder} não encontrada ou inacessível`);
-                    }
-                }
-                
-                // Se não encontrou pastas, usar uma lista padrão
-                if (existingFolders.length === 0) {
-                    console.log('Nenhuma pasta detectada, usando lista padrão');
-                    displayFolders(['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12']);
-                } else {
-                    displayFolders(existingFolders);
-                }
-                
-            } catch (error) {
-                console.error('Erro ao tentar detectar pastas:', error);
-                // Fallback para uma lista padrão se a detecção falhar
-                displayFolders(['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12']);
-            }
+        // Dados iniciais de exemplo
+        const defaultFolders = ['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12'];
+        
+        // Função para carregar pastas do localStorage
+        function loadFolders() {
+            const savedFolders = localStorage.getItem('exclusividadesFolders');
+            return savedFolders ? JSON.parse(savedFolders) : defaultFolders;
+        }
+        
+        // Função para salvar pastas no localStorage
+        function saveFolders(folders) {
+            localStorage.setItem('exclusividadesFolders', JSON.stringify(folders));
         }
         
         // Função para exibir as pastas na interface
@@ -254,7 +296,11 @@
             const grid = document.getElementById('exclusividades-grid');
             
             if (folders.length === 0) {
-                grid.innerHTML = '<div class="no-results">Nenhuma exclusividade encontrada.</div>';
+                grid.innerHTML = `
+                    <div class="status info">
+                        Nenhuma pasta cadastrada. Use o painel acima para adicionar pastas.
+                    </div>
+                `;
                 return;
             }
             
@@ -270,8 +316,8 @@
                 const displayName = folder.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                 
                 card.innerHTML = `
-                    <a href="./exclusividades/${folder}/">
-                        <div class="card-image" style="background-color: ${colors[colorIndex]}">
+                    <a href="./exclusividades/${folder}/" target="_blank">
+                        <div class="card-image" style="background: linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})">
                             ${folder.charAt(0).toUpperCase()}
                         </div>
                         <div class="card-content">
@@ -283,54 +329,74 @@
                 
                 grid.appendChild(card);
             });
-            
-            // Adicionar o listener de busca após renderizar os cards
-            setupSearch();
         }
         
-        // Configurar a funcionalidade de busca
-        function setupSearch() {
-            const searchInput = document.getElementById('search-input');
+        // Função para tentar detectar pastas automaticamente
+        async function tryDetectFolders() {
+            const grid = document.getElementById('exclusividades-grid');
+            grid.innerHTML = '<div class="status info">Tentando detectar pastas automaticamente...</div>';
             
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const cards = document.querySelectorAll('.card');
-                let hasVisible = false;
+            // Esta é uma simulação - na realidade, o JavaScript do navegador não pode acessar o sistema de arquivos
+            setTimeout(() => {
+                const status = document.createElement('div');
+                status.className = 'status warning';
+                status.innerHTML = `
+                    <p>Não foi possível detectar automaticamente as pastas devido às limitações de segurança do navegador.</p>
+                    <p>Use o painel acima para cadastrar manualmente suas pastas.</p>
+                `;
+                grid.innerHTML = '';
+                grid.appendChild(status);
                 
-                cards.forEach(card => {
-                    const cardName = card.getAttribute('data-name').toLowerCase();
-                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
-                    
-                    if (cardName.includes(searchTerm) || cardTitle.includes(searchTerm)) {
-                        card.style.display = 'block';
-                        hasVisible = true;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                
-                // Mostrar mensagem se não houver resultados
-                const noResults = document.getElementById('no-results');
-                if (!hasVisible) {
-                    if (!noResults) {
-                        const noResultsMsg = document.createElement('div');
-                        noResultsMsg.id = 'no-results';
-                        noResultsMsg.className = 'no-results';
-                        noResultsMsg.innerHTML = '<p>Nenhuma exclusividade encontrada. Tente outros termos de busca.</p>';
-                        document.getElementById('exclusividades-grid').appendChild(noResultsMsg);
-                    }
-                } else if (noResults) {
-                    noResults.remove();
-                }
-            });
+                // Recarregar as pastas salvas
+                const folders = loadFolders();
+                displayFolders(folders);
+            }, 2000);
         }
         
         // Inicializar a página
         document.addEventListener('DOMContentLoaded', function() {
-            listSubfolders();
+            // Carregar pastas salvas
+            const folders = loadFolders();
+            displayFolders(folders);
             
-            // Botão para atualizar a lista
-            document.getElementById('refresh-btn').addEventListener('click', listSubfolders);
+            // Configurar o botão de adicionar pasta
+            document.getElementById('add-folder').addEventListener('click', function() {
+                const folderNameInput = document.getElementById('folder-name');
+                const folderName = folderNameInput.value.trim();
+                
+                if (folderName) {
+                    const folders = loadFolders();
+                    if (!folders.includes(folderName)) {
+                        folders.push(folderName);
+                        saveFolders(folders);
+                        displayFolders(folders);
+                        folderNameInput.value = '';
+                    } else {
+                        alert('Esta pasta já foi adicionada!');
+                    }
+                } else {
+                    alert('Por favor, digite um nome para a pasta!');
+                }
+            });
+            
+            // Configurar o botão de detectar pastas
+            document.getElementById('detect-folders').addEventListener('click', tryDetectFolders);
+            
+            // Configurar o botão de limpar pastas
+            document.getElementById('clear-folders').addEventListener('click', function() {
+                if (confirm('Tem certeza que deseja limpar todas as pastas?')) {
+                    saveFolders([]);
+                    displayFolders([]);
+                }
+            });
+            
+            // Configurar o botão de reset
+            document.getElementById('reset-demo').addEventListener('click', function() {
+                if (confirm('Isso restaurará os dados de exemplo. Continuar?')) {
+                    saveFolders(defaultFolders);
+                    displayFolders(defaultFolders);
+                }
+            });
         });
     </script>
 </body>
