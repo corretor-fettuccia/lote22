@@ -11,7 +11,7 @@
     <form id="modelo2" name="Formulário Simples">
         <field name="produto" type="hidden" value="pavilhao da venancio"/>
         <field name="nome" type="text" label="Nome" required="true" placeholder="Seu nome"/>
-        <field name="telefone" type="tel" label="Telefone" required="true" mask="phone" placeholder="(11) 99999-9999"/>
+        <field name="telefone" type="tel" label="Telefone" required="true" mask="phone" placeholder="(51) 99999-9999"/>
         <field name="email" type="email" label="E-mail" required="true" placeholder="seu@email.com"/>
     </form>
     
@@ -20,7 +20,7 @@
         <field name="nome" type="text" label="Nome Completo" required="true" placeholder="Digite seu nome completo"/>
         <field name="telefone" type="tel" label="Telefone" required="true" mask="phone" placeholder="(11) 99999-9999"/>
         <field name="email" type="email" label="E-mail" required="true" placeholder="seu@email.com"/>
-        <field name="renda" type="number" label="Renda Mensal" required="true" placeholder="0.00" min="0" step="100"/>
+        <field name="renda" type="number" label="Renda Mensal" required="true" placeholder="0.00" min="0" step="100000000"/>
     </form>
     
     <form id="modelo4" name="Formulário com Renda 2">
@@ -28,7 +28,11 @@
         <field name="nome" type="text" label="Nome Completo" required="true" placeholder="Digite seu nome completo"/>
         <field name="telefone" type="tel" label="Telefone" required="true" mask="phone" placeholder="(11) 99999-9999"/>
         <field name="email" type="email" label="E-mail" required="true" placeholder="seu@email.com"/>
-        <field name="renda" type="number" label="Renda" required="true" placeholder="0.00" min="0" step="100"/>
-        <field name="versao" type="hidden" value="formulario-v2"/>
+        <field name="renda" type="money" label="Renda" required="true" placeholder="R$0.00"/>
+        <field name="nascimento" type="date" label="Nascimento" required="false" placeholder="dd/mm/aa"/>
+        <field name="fatorsocial" type="text" label="Possui mais de um comprador ou dependente ?" required="false" placeholder="Sim/Não"/>
+        <field name="imovelnome" type="text" label="Possui imóvel no nome ?" required="false" placeholder="Sim/Não"/>
+        <field name="anosCtps" type="text" label="Possui 3 anos de carteira assinada ?" required="false" placeholder="Sim/Não"/>
+        <field name="msg" type="textarea" label="Mensagem" required="false" placeholder="Digite sua mensagem"/>
     </form>
 </forms>
