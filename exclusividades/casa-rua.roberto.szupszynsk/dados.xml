@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<landpage>
+    <config>
+        <titulo>Casa de Alto Padrão | Pronta para Morar | Canoas - RS</titulo>
+        <theme>
+            <primary>#9a6700</primary> 
+            <secondary>#e2e8f0</secondary>
+            <accent>#c28100</accent>
+        </theme>
+    </config>
+    
+    <navigation>
+        <logo>Exclusividade imobiliária</logo>
+        <links>
+            <link>
+                <texto>O Imóvel</texto>
+                <url>#property</url>
+            </link>
+            <link>
+                <texto>Diferenciais</texto>
+                <url>#features</url>
+            </link>
+            <link>
+                <texto>Localização</texto>
+                <url>#location</url>
+            </link>
+            <link>
+                <texto>Galeria</texto>
+                <url>#gallery</url>
+            </link>
+        </links>
+    </navigation>
+    
+    <hero>
+        <imagem>./fotos/Imagem-1.webp</imagem>
+        <titulo>Linda <destaque>Casa de Alto Padrão</destaque></titulo>
+        <subtitulo>Seminova, mobiliada e pronta para morar. Arquitetura moderna com pé-direito duplo, alto padrão de acabamento e área gourmet integrada.</subtitulo>
+        <botao>
+            <texto>Agende uma visita</texto>
+            <url>#contact</url>
+        </botao>
+    </hero>
+    
+    <property>
+        <titulo>O Imóvel</titulo>
+        <imagem>./fotos/Imagem-54.webp</imagem>
+        <subtitulo>Casa de alto padrão <destaque>com 3 dormitórios, suíte master com banheira e amplo terreno de 300m².</destaque></subtitulo>
+        <detalhes>
+            <detalhe>
+                <valor>206m²</valor>
+                <descricao>Área total construída</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>165m²</valor>
+                <descricao>Área privativa</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>300m²</valor>
+                <descricao>Terreno total</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>10m</valor>
+                <descricao>Frente e Fundos</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>30m</valor>
+                <descricao>Laterais</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>3 dormitórios</valor>
+                <descricao>Inclui 1 suíte com banheira</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>2 banheiros + 2 lavabos</valor>
+                <descricao>Sanitários bem distribuídos</descricao>
+            </detalhe>
+            <detalhe>
+                <valor>2 vagas</valor>
+                <descricao>Garagens cobertas</descricao>
+            </detalhe>
+        </detalhes>
+        <descricao>
+            Imóvel seminovo (2024), posição solar frente leste, mobiliado e pronto para morar. 
+            Conta com sala de estar e jantar integradas, cozinha montada, área gourmet com churrasqueira e amplo jardim. 
+            Projeto moderno com iluminação em LED na fachada.
+        </descricao>
+        <caracteristicas>
+            <caracteristica>Closet</caracteristica>
+            <caracteristica>Depósito</caracteristica>
+            <caracteristica>Área gourmet interna e externa</caracteristica>
+            <caracteristica>Quiosque com churrasqueira</caracteristica>
+            <caracteristica>Jardim frontal e lateral</caracteristica>
+        </caracteristicas>
+    </property>
+    
+    <features>
+        <titulo>Diferenciais Exclusivos</titulo>
+        <itens>
+            <item>
+                <icone>maximize</icone>
+                <titulo>Pé-direito duplo</titulo>
+                <descricao>Estrutura moderna que valoriza iluminação e amplitude dos ambientes.</descricao>
+            </item>
+            <item>
+                <icone>sun</icone>
+                <titulo>Painel Solar funcionando</titulo>
+                <descricao>Equipado para economia de energia e sustentabilidade.</descricao>
+            </item>
+            <item>
+                <icone>droplet</icone>
+                <titulo>Reuso de Água</titulo>
+                <descricao>Cisterna instalada para captação e reaproveitamento de água pluvial.</descricao>
+            </item>
+            <item>
+                <icone>home</icone>
+                <titulo>Alto Padrão</titulo>
+                <descricao>Acabamentos sofisticados e fachada com detalhes em LED.</descricao>
+            </item>
+            <item>
+                <icone>shield</icone>
+                <titulo>Segurança Completa</titulo>
+                <descricao>Cerca elétrica, câmeras, interfone e portão eletrônico.</descricao>
+            </item>
+            <item>
+                <icone>wind</icone>
+                <titulo>Conforto Térmico</titulo>
+                <descricao>Ambientes climatizados com ar condicionado instalado.</descricao>
+            </item>
+        </itens>
+    </features>
+    
+    <location>
+        <titulo>Localização</titulo>
+        <subtitulo><destaque>Bairro Igara – Canoas/RS</destaque></subtitulo>
+        <endereco>Rua Roberto Szupszynsk, 48 – Canoas/RS – CEP 92410-304</endereco>
+        <entorno>
+            <item>Próximo ao Hospital da Ulbra</item>
+            <item>Escolas públicas e privadas</item>
+            <item>Comércio local variado</item>
+            <item>Mercados e farmácias</item>
+        </entorno>
+        <acessos>
+            <item>Fácil acesso à BR-116 e BR-448</item>
+            <item>Conexão rápida com Porto Alegre</item>
+        </acessos>
+        <mapa>https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d605.9707782874959!2d-51.169665628659146!3d-29.896929041238465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95196ffb37edb74b%3A0x4d6f248ba03984ce!2sR.%20Roberto%20Szupszynski%2C%2048%20-%20Igara%2C%20Canoas%20-%20RS!5e1!3m2!1spt-BR!2sbr!4v1757030213058!5m2!1spt-BR!2sbr</mapa>
+    </location>
+    
+    <gallery>
+        <titulo>Galeria</titulo>
+        <imagens>
+            <imagem>./fotos/Imagem-37.webp</imagem>
+            <imagem>./fotos/Imagem-50.webp</imagem> 
+            <imagem>./fotos/Imagem-47.webp</imagem>
+            <imagem>./fotos/Imagem-48.webp</imagem>
+            <imagem>./fotos/Imagem-49.webp</imagem>
+            <imagem>./fotos/Imagem-51.webp</imagem>
+            <imagem>./fotos/Imagem-53.webp</imagem>
+            <imagem>./fotos/Imagem-54.webp</imagem>
+            <imagem>./fotos/Imagem-55.webp</imagem>
+            <imagem>./fotos/Imagem-56.webp</imagem>
+
+            <imagem>./fotos/Imagem-58.webp</imagem>
+            <imagem>./fotos/Imagem-1.webp</imagem>
+            <imagem>./fotos/Imagem-38.webp</imagem>            
+            <imagem>./fotos/Imagem-5.webp</imagem>
+            <imagem>./fotos/Imagem-6.webp</imagem>
+            <imagem>./fotos/Imagem-7.webp</imagem>
+            <imagem>./fotos/Imagem-8.webp</imagem>
+            <imagem>./fotos/Imagem-10.webp</imagem>
+            <imagem>./fotos/Imagem-13.webp</imagem>
+            <imagem>./fotos/Imagem-14.webp</imagem>
+            <imagem>./fotos/Imagem-15.webp</imagem>
+            <imagem>./fotos/Imagem-16.webp</imagem>
+            <imagem>./fotos/Imagem-17.webp</imagem>
+            <imagem>./fotos/Imagem-18.webp</imagem>           
+            <imagem>./fotos/Imagem-21.webp</imagem>
+            <imagem>./fotos/Imagem-22.webp</imagem>
+            <imagem>./fotos/Imagem-23.webp</imagem>
+            <imagem>./fotos/Imagem-24.webp</imagem>
+            <imagem>./fotos/Imagem-25.webp</imagem>
+            <imagem>./fotos/Imagem-26.webp</imagem>
+            <imagem>./fotos/Imagem-27.webp</imagem>
+            <imagem>./fotos/Imagem-29.webp</imagem>
+            <imagem>./fotos/Imagem-30.webp</imagem>            
+            <imagem>./fotos/Imagem-33.webp</imagem>
+            <imagem>./fotos/Imagem-35.webp</imagem>
+            <imagem>./fotos/Imagem-36.webp</imagem>
+            <imagem>./fotos/Imagem-39.webp</imagem>
+            <imagem>./fotos/Imagem-40.webp</imagem>            
+            <imagem>./fotos/Imagem-44.webp</imagem>
+            <imagem>./fotos/Imagem-45.webp</imagem>
+            <imagem>./fotos/Imagem-46.webp</imagem>
+           
+            <imagem>./fotos/Imagem-59.webp</imagem>
+
+            
+        </imagens>
+    </gallery>
+    
+    <contact>
+        <titulo>Agende sua Visita</titulo>
+    </contact>
+    
+    <footer>
+        <empresa>
+            <nome>Corretor Fettuccia</nome>
+            <descricao>Especialista em imóveis de alto padrão, comerciais e residenciais na região de Canoas e Porto Alegre.</descricao>
+        </empresa>
+        <contato>
+            <telefone>(51) 99811-1078</telefone>
+            <email>corretor.fettuccia@gmail.com</email>
+        </contato>
+        <social>
+            <facebook>https://www.facebook.com/roberto.fettuccia.14</facebook>
+            <instagram>https://www.instagram.com/roberto.fettuccia</instagram>
+            <linkedin>https://www.linkedin.com/in/roberto-fettuccia/</linkedin>
+            <youtube>https://www.youtube.com/@Corretor-RobertoFettuccia</youtube>
+        </social>
+        <copyright>2025 Corretor Fettuccia. Todos os direitos reservados.</copyright>
+    </footer>
+</landpage>
+
