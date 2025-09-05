@@ -1,3 +1,71 @@
+/**
+ * FormBuilder.js - Sistema de formulários dinâmicos com integração Google Sheets
+ * Versão: 3.1.0
+ * Data: 2025
+ * 
+ * DESCRIÇÃO:
+ * Classe para criação dinâmica de formulários baseados em configuração XML
+ * com integração direta com Google Sheets via Google Apps Script.
+ * 
+ * CARACTERÍSTICAS:
+ * - Formulários dinâmicos baseados em XML
+ * - Validação de campos e máscaras
+ * - Popup automático com controle de cookies
+ * - Integração com Google Sheets
+ * - Data/hora automática
+ * - Design responsivo
+ * 
+ * INSTRUÇÕES DE USO:
+ * 
+ * 1. INCLUSÃO DO ARQUIVO:
+ *    <script src="caminho/para/FormBuilder.js"></script>
+ * 
+ * 2. CONFIGURAÇÃO XML:
+ *    Criar arquivo XML com a estrutura dos formulários:
+ *    <?xml version="1.0" encoding="UTF-8"?>
+ *    <forms>
+ *      <form id="modelo1" name="Formulário Principal">
+ *        <field name="nome" type="text" label="Nome Completo" required="true" placeholder="Digite seu nome"/>
+ *        <field name="email" type="email" label="E-mail" required="true" placeholder="seu@email.com"/>
+ *        <field name="telefone" type="tel" label="Telefone" required="true" mask="phone" placeholder="(11) 99999-9999"/>
+ *        <field name="produto" type="hidden" value="Produto Padrão"/>
+ *      </form>
+ *    </forms>
+ * 
+ * 3. INICIALIZAÇÃO:
+ *    // Carregar configuração primeiro
+ *    FormBuilder.loadConfig('caminho/para/config.xml').then(() => {
+ *        // Inicializar formulário principal
+ *        new FormBuilder('containerId', 'modelo1');
+ *        
+ *        // Inicializar popup automático (opcional)
+ *        FormBuilder.initPopup('modelo1', 30000); // Aparece após 30 segundos
+ *    });
+ * 
+ * 4. PERSONALIZAÇÃO:
+ *    const options = {
+ *        hiddenFields: { origem: 'site', campanha: 'verao2024' },
+ *        styles: {
+ *            formClass: 'minha-classe-form',
+ *            inputClass: 'minha-classe-input',
+ *            buttonClass: 'minha-classe-botao'
+ *        }
+ *    };
+ *    new FormBuilder('containerId', 'modelo1', options);
+ * 
+ * ESTRUTURA DA PLANILHA GOOGLE SHEETS:
+ * As colunas devem estar nesta ordem:
+ * 1. dataHora | 2. produto | 3. nome | 4. email | 5. telefone
+ * 6. renda | 7. nascimento | 8. fatorSocial | 9. imovelNome 
+ * 10. fgts3anos | 11. mensagem
+ * 
+ * GOOGLE APPS SCRIPT:
+ * O script deve estar configurado para receber os parâmetros com estes nomes exatos.
+ * 
+ * LICENÇA: MIT
+ * AUTOR: Roberto fettuccia
+ */
+
 // Classe principal do construtor de formulários
 class FormBuilder {
     constructor(containerId, modelType, options = {}) {
@@ -216,9 +284,18 @@ class FormBuilder {
                 second: '2-digit'
             }).replace(',', '');
             
+            // Coletar todos os dados do formulário
             const formData = new FormData(form);
+            
             // Adiciona a data/hora formatada aos dados do formulário
-            formData.append('dataHoraFormatada', dataHoraFormatada);
+            // Usando o nome exato que o Google Script espera: 'dataHora'
+            formData.append('dataHora', dataHoraFormatada);
+            
+            // Para debug: verificar todos os campos que estão sendo enviados
+            console.log("Campos a serem enviados:");
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
             
             // URL de execução
             const urlEXEC = "https://script.google.com/macros/s/AKfycbzszUr6ZdX4UPgZPe_HQPQ-gHpkVrV02ic1NYttpFlhcuXdMy0-HnzZyVQDAfmXxsnv/exec";
