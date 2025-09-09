@@ -3,399 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem Dinâmica de Exclusividades</title>
+    <title>Fettuccia Imóveis - Oportunidades Exclusivas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
-            --warning: #f39c12;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 30px 0;
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        
-        .admin-panel {
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .admin-panel h2 {
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--dark);
-        }
-        
-        input[type="text"] {
+        .brick-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(to right, #c0b7b1 1px, transparent 1px),
+                linear-gradient(to bottom, #c0b7b1 1px, transparent 1px);
+            background-size: 60px 30px;
+            animation: assembleBricks 15s steps(10) infinite, pulseOpacity 8s ease-in-out infinite alternate;
         }
-        
-        button {
-            padding: 12px 20px;
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+
+        @keyframes assembleBricks {
+            0% { 
+                background-position: 0 -100vh;
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.08;
+            }
+            100% { 
+                background-position: 0 0;
+                opacity: 0.08;
+            }
         }
-        
-        button:hover {
-            background-color: #2980b9;
+
+        @keyframes pulseOpacity {
+            0% { opacity: 0.05; }
+            100% { opacity: 0.15; }
         }
-        
-        .btn-success {
-            background-color: var(--success);
-        }
-        
-        .btn-success:hover {
-            background-color: #27ae60;
-        }
-        
-        .btn-warning {
-            background-color: var(--warning);
-        }
-        
-        .btn-warning:hover {
-            background-color: #e67e22;
-        }
-        
-        .actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 12px;
+
+        /* Falling bricks effect */
+        .falling-bricks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
-            border: 1px solid #e0e0e0;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+
+        .brick {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: #c0b7b1;
+            opacity: 0;
+            transform: translateY(-100px);
+            animation: fall 3s ease-in forwards;
         }
-        
-        .card-image {
-            height: 180px;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            font-weight: bold;
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0;
+            }
         }
-        
-        .card-content {
-            padding: 20px;
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
-        
-        .card h3 {
-            margin-bottom: 10px;
-            color: var(--dark);
-            text-transform: capitalize;
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
-        
-        .card p {
-            color: #7f8c8d;
-            font-size: 0.9rem;
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
         }
-        
-        .card a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
+
+        .shine-effect:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+            transition: all 0.1s ease;
+            opacity: 0;
         }
-        
-        .status {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .status.info {
-            background-color: #d6eaf8;
-            color: #2874a6;
-        }
-        
-        .status.warning {
-            background-color: #fdebd0;
-            color: #d35400;
-        }
-        
-        .manual-mode .card {
+
+        .shine-effect:hover:after {
+            left: 100%;
             opacity: 0.8;
+            transition-duration: 0.3s;
         }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+
+        .magnetic-effect {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
-        
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .actions {
-                flex-direction: column;
-            }
+        .magnetic-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
-        @media (max-width: 480px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            
-            header {
-                padding: 20px 0;
-            }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #8B5A2B, #D2B48C, #A0522D, #8B5A2B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .parallax-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Nossas Exclusividades</h1>
-            <p class="subtitle">Descubra nossas opções exclusivas de propriedades</p>
-        </header>
-        
-        <div class="status warning">
-            <p><strong>Atenção:</strong> O JavaScript do navegador não pode acessar diretamente as pastas do servidor por questões de segurança.</p>
-            <p>Use o painel abaixo para cadastrar manualmente suas pastas ou clique em "Tentar Detectar Automaticamente".</p>
-        </div>
-        
-        <div class="admin-panel">
-            <h2>Gerenciar Pastas</h2>
-            <div class="form-group">
-                <label for="folder-name">Nome da Pasta (ex: casa1, predio24):</label>
-                <input type="text" id="folder-name" placeholder="Digite o nome da pasta">
+<body class="bg-gray-50 font-sans">
+    <div class="falling-bricks" id="fallingBricks"></div>
+    <div class="brick-pattern"></div>
+    <div class="parallax-layer" style="background: radial-gradient(circle at 20% 50%, rgba(210,180,140,0.1) 0%, transparent 50%);"></div>
+    <div class="parallax-layer" style="background: radial-gradient(circle at 80% 30%, rgba(139,90,43,0.1) 0%, transparent 50%);"></div>
+
+    <header class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-50" id="headerBackground"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6" data-aos="fade-down">
+                <span class="gradient-text">Roberto Fettuccia - Creci 83599F</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-8" data-aos="fade-up" data-aos-delay="200">
+                Lote 22 oportunidades imobiliárias com uma vitrine diferenciada.
+            </p>
+            <div class="flex justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                <a href="tel:+5551998111078" class="magnetic-effect shine-effect bg-amber-700 hover:bg-amber-800 text-white px-6 py-3 rounded-full font-medium flex items-center gap-2 relative overflow-hidden">
+                    <i data-feather="phone"></i> (51) 9 9811-1078
+                </a>
+                <a href="mailto:corretor.fettuccia@gmail.com" class="magnetic-effect shine-effect bg-white hover:bg-gray-100 text-gray-800 px-6 py-3 rounded-full font-medium flex items-center gap-2 relative overflow-hidden">
+                    <i data-feather="mail"></i> Contato
+                </a>
             </div>
-            <button id="add-folder" class="btn-success">Adicionar Pasta</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800" data-aos="fade-up">Oportunidades Exclusivas</h2>
             
-            <div class="actions">
-                <button id="detect-folders" class="btn-warning">Tentar Detectar Automaticamente</button>
-                <button id="clear-folders">Limpar Todas as Pastas</button>
-                <button id="reset-demo">Restaurar Dados de Exemplo</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property Card 1 -->
+                <div class="magnetic-effect bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <img src="http://static.photos/estate/640x360/1" alt="Imóvel 1" class="w-full h-48 object-cover floating">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Residencial Alto Padrão</h3>
+                        <p class="text-gray-600 mb-4">Bairro Nobre | 300m² | 4 Quartos</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-700 font-bold">R$ 1.250.000</span>
+                            <button class="text-amber-700 hover:text-amber-800 flex items-center gap-1">
+                                <i data-feather="eye"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="magnetic-effect bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <img src="http://static.photos/estate/640x360/2" alt="Imóvel 2" class="w-full h-48 object-cover floating" style="animation-delay: 0.5s;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Apartamento Vista Mar</h3>
+                        <p class="text-gray-600 mb-4">Zona Sul | 120m² | 3 Quartos</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-700 font-bold">R$ 980.000</span>
+                            <button class="text-amber-700 hover:text-amber-800 flex items-center gap-1">
+                                <i data-feather="eye"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="magnetic-effect bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <img src="http://static.photos/estate/640x360/3" alt="Imóvel 3" class="w-full h-48 object-cover floating" style="animation-delay: 1s;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Terreno Comercial</h3>
+                        <p class="text-gray-600 mb-4">Centro | 500m² | Excelente Localização</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-700 font-bold">R$ 1.750.000</span>
+                            <button class="text-amber-700 hover:text-amber-800 flex items-center gap-1">
+                                <i data-feather="eye"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-r from-amber-700 to-amber-900 rounded-2xl p-8 md:p-12 text-white mb-20" data-aos="fade-up">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">Encontre o Imóvel dos Seus Sonhos</h2>
+                <p class="text-lg mb-8">Com mais de 10 anos de experiência no mercado imobiliário, ofereço assessoria completa para compra, venda e locação de imóveis residenciais e comerciais.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="tel:+5551998111078" class="magnetic-effect bg-white hover:bg-gray-100 text-amber-800 px-6 py-3 rounded-full font-medium flex items-center justify-center gap-2">
+                        <i data-feather="phone"></i> Ligar Agora
+                    </a>
+                    <a href="https://wa.me/5551998111078" class="magnetic-effect bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-full font-medium flex items-center justify-center gap-2">
+                        <i data-feather="message-square"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800" data-aos="fade-up">Por Que Escolher Nossos Serviços?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <div class="magnetic-effect bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-amber-700 mb-4">
+                        <i data-feather="award" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Experiência Comprovada</h3>
+                    <p class="text-gray-600">Mais de 15 anos no mercado imobiliário com centenas de negócios fechados.</p>
+                </div>
+                
+                <div class="magnetic-effect bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-amber-700 mb-4">
+                        <i data-feather="search" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Oportunidades Exclusivas</h3>
+                    <p class="text-gray-600">Acesso a propriedades premium antes mesmo de entrarem no mercado.</p>
+                </div>
+                
+                <div class="magnetic-effect bg-white p-6 rounded-xl shadow-md h-full" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-amber-700 mb-4">
+                        <i data-feather="shield" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Segurança Jurídica</h3>
+                    <p class="text-gray-600">Toda a documentação verificada e processos acompanhados por especialistas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Roberto Fettuccia - Creci 83599-F</h3>
+                    <p class="text-gray-400">Lote 22 oportunidades imobiliárias com uma vitrine diferenciada.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i data-feather="phone" class="w-5 h-5"></i>
+                            <a href="tel:+5551998111078" class="hover:text-amber-400">(51) 9 9811-1078</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="mail" class="w-5 h-5"></i>
+                            <a href="mailto:corretor.fettuccia@gmail.com" class="hover:text-amber-400">corretor.fettuccia@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Redes Sociais</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-amber-400">
+                            <i data-feather="facebook" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="hover:text-amber-400">
+                            <i data-feather="instagram" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="hover:text-amber-400">
+                            <i data-feather="linkedin" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 Roberto Fettuccia. Todos os direitos reservados.</p>
+                <p class="mt-2">Corretor Roberto Fettuccia - CRECI 83599-F | corretor.fettuccia@gmail.com</p>
             </div>
         </div>
-        
-        <div class="grid" id="exclusividades-grid">
-            <div class="status info">
-                Carregando pastas...
-            </div>
-        </div>
-    </div>
-    
-    <footer>
-        <p>&copy; 2023 Exclusividades Imobiliárias. Todos os direitos reservados.</p>
-        <p>As pastas são armazenadas localmente no seu navegador.</p>
     </footer>
 
     <script>
-        // Cores para os thumbnails
-        const colors = ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f39c12', '#1abc9c', '#d35400', '#27ae60'];
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-back',
+            once: true,
+            offset: 120
+        });
         
-        // Dados iniciais de exemplo
-        const defaultFolders = ['casa1', 'predio24', 'mansao5', 'cobertura3', 'campo7', 'loft12'];
+        feather.replace();
         
-        // Função para carregar pastas do localStorage
-        function loadFolders() {
-            const savedFolders = localStorage.getItem('exclusividadesFolders');
-            return savedFolders ? JSON.parse(savedFolders) : defaultFolders;
-        }
-        
-        // Função para salvar pastas no localStorage
-        function saveFolders(folders) {
-            localStorage.setItem('exclusividadesFolders', JSON.stringify(folders));
-        }
-        
-        // Função para exibir as pastas na interface
-        function displayFolders(folders) {
-            const grid = document.getElementById('exclusividades-grid');
+        // Enhanced magnetic effect with parallax
+        document.querySelectorAll('.magnetic-effect').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const angleX = (x - centerX) / 15;
+                const angleY = (y - centerY) / 15;
+                
+                gsap.to(el, {
+                    duration: 0.5,
+                    rotateX: -angleY,
+                    rotateY: angleX,
+                    scale: 1.05,
+                    ease: "power2.out"
+                });
+            });
             
-            if (folders.length === 0) {
-                grid.innerHTML = `
-                    <div class="status info">
-                        Nenhuma pasta cadastrada. Use o painel acima para adicionar pastas.
-                    </div>
-                `;
-                return;
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, {
+                    duration: 0.7,
+                    rotateX: 0,
+                    rotateY: 0,
+                    scale: 1,
+                    ease: "elastic.out(1, 0.5)"
+                });
+            });
+        });
+
+        // Falling bricks effect
+        function createFallingBricks() {
+            const container = document.getElementById('fallingBricks');
+            const brickCount = 20;
+            
+            for (let i = 0; i < brickCount; i++) {
+                const brick = document.createElement('div');
+                brick.className = 'brick';
+                
+                // Random position
+                brick.style.left = `${Math.random() * 100}%`;
+                
+                // Random delay and duration
+                brick.style.animationDelay = `${Math.random() * 15}s`;
+                brick.style.animationDuration = `${3 + Math.random() * 7}s`;
+                
+                // Random size variation
+                const size = 0.5 + Math.random() * 0.5;
+                brick.style.width = `${60 * size}px`;
+                brick.style.height = `${30 * size}px`;
+                
+                // Random opacity
+                brick.style.opacity = 0.05 + Math.random() * 0.1;
+                
+                container.appendChild(brick);
             }
-            
-            grid.innerHTML = '';
-            
-            folders.forEach((folder, index) => {
-                const colorIndex = index % colors.length;
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.setAttribute('data-name', folder);
-                
-                // Formatar o nome para exibição
-                const displayName = folder.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                
-                card.innerHTML = `
-                    <a href="./exclusividades/${folder}/" target="_blank">
-                        <div class="card-image" style="background: linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})">
-                            ${folder.charAt(0).toUpperCase()}
-                        </div>
-                        <div class="card-content">
-                            <h3>${displayName}</h3>
-                            <p>Clique para explorar esta propriedade exclusiva.</p>
-                        </div>
-                    </a>
-                `;
-                
-                grid.appendChild(card);
-            });
         }
-        
-        // Função para tentar detectar pastas automaticamente
-        async function tryDetectFolders() {
-            const grid = document.getElementById('exclusividades-grid');
-            grid.innerHTML = '<div class="status info">Tentando detectar pastas automaticamente...</div>';
+
+        // Header background color variable
+        const headerBgColor = '#002d42'; // Change this value to modify header background color
+        document.getElementById('headerBackground').style.backgroundColor = headerBgColor;
+
+        // Initialize falling bricks
+        createFallingBricks();
+
+        // Parallax effect for background layers
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            // Esta é uma simulação - na realidade, o JavaScript do navegador não pode acessar o sistema de arquivos
-            setTimeout(() => {
-                const status = document.createElement('div');
-                status.className = 'status warning';
-                status.innerHTML = `
-                    <p>Não foi possível detectar automaticamente as pastas devido às limitações de segurança do navegador.</p>
-                    <p>Use o painel acima para cadastrar manualmente suas pastas.</p>
-                `;
-                grid.innerHTML = '';
-                grid.appendChild(status);
+            document.querySelectorAll('.parallax-layer').forEach((layer, i) => {
+                const speed = (i + 1) * 0.5;
+                const xPos = x * speed * 100;
+                const yPos = y * speed * 100;
                 
-                // Recarregar as pastas salvas
-                const folders = loadFolders();
-                displayFolders(folders);
-            }, 2000);
-        }
-        
-        // Inicializar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carregar pastas salvas
-            const folders = loadFolders();
-            displayFolders(folders);
-            
-            // Configurar o botão de adicionar pasta
-            document.getElementById('add-folder').addEventListener('click', function() {
-                const folderNameInput = document.getElementById('folder-name');
-                const folderName = folderNameInput.value.trim();
-                
-                if (folderName) {
-                    const folders = loadFolders();
-                    if (!folders.includes(folderName)) {
-                        folders.push(folderName);
-                        saveFolders(folders);
-                        displayFolders(folders);
-                        folderNameInput.value = '';
-                    } else {
-                        alert('Esta pasta já foi adicionada!');
-                    }
-                } else {
-                    alert('Por favor, digite um nome para a pasta!');
-                }
-            });
-            
-            // Configurar o botão de detectar pastas
-            document.getElementById('detect-folders').addEventListener('click', tryDetectFolders);
-            
-            // Configurar o botão de limpar pastas
-            document.getElementById('clear-folders').addEventListener('click', function() {
-                if (confirm('Tem certeza que deseja limpar todas as pastas?')) {
-                    saveFolders([]);
-                    displayFolders([]);
-                }
-            });
-            
-            // Configurar o botão de reset
-            document.getElementById('reset-demo').addEventListener('click', function() {
-                if (confirm('Isso restaurará os dados de exemplo. Continuar?')) {
-                    saveFolders(defaultFolders);
-                    displayFolders(defaultFolders);
-                }
+                gsap.to(layer, {
+                    x: xPos,
+                    y: yPos,
+                    duration: 2,
+                    ease: "power1.out"
+                });
             });
         });
     </script>
