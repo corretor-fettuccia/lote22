@@ -1,0 +1,166 @@
+<!-- ========== META TAGS GERADAS PELA FERRAMENTA PROFISSIONAL ========== -->
+
+<!-- Meta Tags Básicas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Roberto Fettuccia - Corretor de Imóveis">
+    <meta name="description" content="Fazenda interlagos permite aquisição de terreno e construção, infraestrutura de condomínio fechado com ar de fazenda.">
+    <meta name="keywords" content="fazenda interlagos, nova santa rita, condominio fazeda, lote rural financiável, aceita financiamento caixa, aceita parcelamento direto">
+
+    <title>Condomínio Fechado - Fazenda Interlagos - Lotes com medias de 2mil m²</title>
+
+<!-- Favicon -->
+    <link rel="icon" href="https://lote22.com.br/fazenda-interlagos/icon.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://lote22.com.br/fazenda-interlagos/icon.jpeg">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://lote22.com.br/fazenda-interlagos/icon.jpeg">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://lote22.com.br/fazenda-interlagos/icon.jpeg">
+
+<!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Fazenda interlagos - Nova Santa Rita">
+    <meta property="og:url" content="lote22.com.br/fazenda-interlagos">
+    <meta property="og:title" content="Fazenda Interlagos | Condomínio Fechado com Lotes a partir de 2.000 m²">
+    <meta property="og:description" content="Fazenda Interlagos em Nova Santa Rita. Condomínio fazenda com lotes rurais financiáveis, aceita financiamento Caixa e parcelamento direto. Fazenda Interlagos permite aquisição de terreno e construção, com infraestrutura de condomínio fechado e clima de fazenda. Lotes com média de 2.000 m².">
+    <meta property="og:image" content="https://newedition.com.br/img/share.webp">
+    <meta property="fb:app_id" content="1061739694334514">
+
+<!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Condomínio Fechado - Fazenda Interlagos - Lotes com medias de 2mil m²">
+    <meta name="twitter:description" content="Condomínio fechado de lotes em Canoas com mais de 9.000m² de lazer e infraestrutura premium.">
+    <meta name="twitter:image" content="https://newedition.com.br/img/share.webp">
+
+<!-- Geo Tags -->
+    <meta name="geo.region" content="BR-RS">
+    <meta name="geo.placename" content="Estr. Itapui, 1140, Nova Santa Rita - RS, 92480-000">
+    <meta name="geo.position" content="-29.90834;-51.157749">
+    <meta name="ICBM" content="-29.90834, -51.157749">
+
+<!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+{
+      "@context": "https://schema.org",
+      "@type": "RealEstateListing",
+      "name": "Condomínio Fechado - Fazenda Interlagos - Lotes com medias de 2mil m²",
+      "description": "Fazenda interlagos permite aquisição de terreno e construção, infraestrutura de condomínio fechado com ar de fazenda.",
+      "url": "lote22.com.br/fazenda-interlagos",
+      "image": "https://newedition.com.br/img/share.webp",
+      "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Estr. Itapui, 1140, Nova Santa Rita - RS, 92480-000",
+            "addressLocality": " Nova Santa Rita",
+            "addressRegion": "RS",
+            "postalCode": "92480-000",
+            "addressCountry": "BR"
+      },
+      "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -29.90834,
+            "longitude": -51.157749
+      },
+      "listingStatus": "https://schema.org/ForSale",
+      "amenityFeature": [
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Condomínio fechado",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "portaria e controle de acesso",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "infraestrutura completa",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "clima de fazenda",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "lotes com média de 2.000 m²",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "natureza e áreas verdes",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "ruas planejadas",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "espaço para construção residencial",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "aquisição de terreno + construção",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "financiamento Caixa",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "parcelamento direto",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "tranquilidade e privacidade",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "fácil acesso a Nova Santa Rita",
+                  "value": true
+            },
+            {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "ideal para morar ou investir.",
+                  "value": true
+            }
+      ],
+      "offers": {
+            "@type": "Offer",
+            "priceCurrency": "BRL",
+            "price": "650000",
+            "availability": "https://schema.org/InStock",
+            "url": "lote22.com.br/fazenda-interlagos"
+      }
+}
+    </script>
+
+<!-- Schema.org Microdata -->
+    <div itemscope itemtype="https://schema.org/RealEstateListing" style="display:none;">
+        <meta itemprop="name" content="Condomínio Fechado - Fazenda Interlagos - Lotes com medias de 2mil m²">
+        <meta itemprop="description" content="Fazenda interlagos permite aquisição de terreno e construção, infraestrutura de condomínio fechado com ar de fazenda.">
+        <meta itemprop="productID" content="62897">
+        <meta itemprop="url" content="lote22.com.br/fazenda-interlagos">
+        <meta itemprop="image" content="https://newedition.com.br/img/share.webp">
+        <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="Estr. Itapui, 1140, Nova Santa Rita - RS, 92480-000">
+            <meta itemprop="addressLocality" content=" Nova Santa Rita">
+            <meta itemprop="addressRegion" content="RS">
+            <meta itemprop="postalCode" content="92480-000">
+            <meta itemprop="addressCountry" content="BR">
+        </div>
+        <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <link itemprop="availability" href="https://schema.org/InStock">
+            <meta itemprop="price" content="650000">
+            <meta itemprop="priceCurrency" content="BRL">
+        </div>
+    </div>
