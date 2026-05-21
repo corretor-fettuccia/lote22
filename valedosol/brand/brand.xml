@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<brand>
+    <messages>
+        <pause time="3000"></pause>
+        <message time="600">Olá</message>
+        <message time="1000">Me chamo Roberto Fettuccia</message>
+        <message time="1000">Este é residencial</message>
+        <message time="1000">Vale do sol</message>
+        <message time="1000">terrenos para construir</message>
+        <message time="1000">aceita minha casa minha vida</message>
+        <message time="1000">e subsídio</message>
+        <message time="1000">escolha seu terreno e me chame</message>
+        <message time="3000">51998111078</message>
+        <pause time="10000000"></pause>
+    </messages>
+</brand>

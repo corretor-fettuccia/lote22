@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marcadores>
+  <marcador id="1779314233371">
+    <x>0.8380</x>
+    <y>0.4687</y>
+    <nome>L 16 - Q14</nome>
+    <lote>16</lote>
+    <quadra>14</quadra>
+    <tipo></tipo>
+    <detalhe></detalhe>
+    <testada></testada>
+    <areaTotal>241</areaTotal>
+    <descricaoDetalhada>Valor e venda 105.000,00</descricaoDetalhada>
+    <cor>#00ff00</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=mJnBIjzkwDSecij0_Cuewg&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=347.76047&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>Localização</texto>
+      <link>https://maps.app.goo.gl/Vf1PPRQomqtLZJ4S8</link>
+    </botao>
+  </marcador>
+  <marcador id="1779321343452">
+    <x>0.1833</x>
+    <y>0.4634</y>
+    <nome>L 03</nome>
+    <lote>03</lote>
+    <quadra></quadra>
+    <tipo>desmembramento</tipo>
+    <detalhe>9,75 x 22,12</detalhe>
+    <testada>9,75</testada>
+    <areaTotal>219,50</areaTotal>
+    <descricaoDetalhada>Valor 115.000
+</descricaoDetalhada>
+    <cor>#00ff00</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=oZ2TLwZxEPXwRu1S5pf8cg&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=323.4093&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>Localização</texto>
+      <link>https://maps.app.goo.gl/iAyv84cevMKsTsfLA</link>
+    </botao>
+  </marcador>
+  <marcador id="1779321353090">
+    <x>0.1711</x>
+    <y>0.4634</y>
+    <nome>L 02</nome>
+    <lote>02</lote>
+    <quadra></quadra>
+    <tipo>desmembramento</tipo>
+    <detalhe>9,75 x 22,13</detalhe>
+    <testada>9,75</testada>
+    <areaTotal>219,30</areaTotal>
+    <descricaoDetalhada>Valor 115.000</descricaoDetalhada>
+    <cor>#00ff00</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=iJBEEHu2x09VfMNbFZNTTw&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=324.37268&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>Localização</texto>
+      <link>https://maps.app.goo.gl/fdk2u8f6TXgLncEd8</link>
+    </botao>
+  </marcador>
+  <marcador id="1779321746253">
+    <x>0.1610</x>
+    <y>0.4637</y>
+    <nome>L 01</nome>
+    <lote>01</lote>
+    <quadra></quadra>
+    <tipo>desmembramento</tipo>
+    <detalhe>9,75 x 22,13</detalhe>
+    <testada>9,75</testada>
+    <areaTotal>219,32</areaTotal>
+    <descricaoDetalhada>Valor 115.000</descricaoDetalhada>
+    <cor>#00ff00</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=zZNrchZyQ_8-70yNZ8dcUA&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=323.21295&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>Localização</texto>
+      <link>https://maps.app.goo.gl/fdk2u8f6TXgLncEd8</link>
+    </botao>
+  </marcador>
+  <marcador id="1779321846981">
+    <x>0.1363</x>
+    <y>0.4633</y>
+    <nome>Lote esquina </nome>
+    <lote>01</lote>
+    <quadra></quadra>
+    <tipo>desmembramento</tipo>
+    <detalhe>10,90 x 11,24 x 30  x 29,70</detalhe>
+    <testada>10,90</testada>
+    <areaTotal>330,57</areaTotal>
+    <descricaoDetalhada>Valor 200.000</descricaoDetalhada>
+    <cor>#00ff00</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=InKwE2Ima0FrZXuqXwjHhg&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=1.246319&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>Localização</texto>
+      <link>https://maps.app.goo.gl/fdk2u8f6TXgLncEd8</link>
+    </botao>
+  </marcador>
+  <marcador id="1779323690991">
+    <x>0.3723</x>
+    <y>0.4953</y>
+    <nome>Praça</nome>
+    <lote></lote>
+    <quadra></quadra>
+    <tipo>Praça</tipo>
+    <detalhe></detalhe>
+    <testada></testada>
+    <areaTotal></areaTotal>
+    <descricaoDetalhada></descricaoDetalhada>
+    <cor>#d4af37</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=MTpuZA2W-sk6XWRiB8_Svw&amp;cb_client=search.gws-prod.gps&amp;w=1800&amp;h=800&amp;yaw=339.4752&amp;pitch=0&amp;thumbfov=100</imagem>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=KmmAfk0ND28g--Nz4nmBEA&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=152.12643&amp;pitch=0&amp;thumbfov=100</imagem>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=GwH-_w51dlRGGAa4iaw9ew&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=179.33308&amp;pitch=0&amp;thumbfov=100</imagem>
+    <botao>
+      <texto>localização</texto>
+      <link>https://maps.app.goo.gl/Vr2BDh2B3L7CNyM3A</link>
+    </botao>
+  </marcador>
+  <marcador id="1779323789525">
+    <x>0.2271</x>
+    <y>0.4406</y>
+    <nome>Rotatória</nome>
+    <lote></lote>
+    <quadra></quadra>
+    <tipo></tipo>
+    <detalhe></detalhe>
+    <testada></testada>
+    <areaTotal></areaTotal>
+    <descricaoDetalhada></descricaoDetalhada>
+    <cor>#d4af37</cor>
+    <imagem>https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=QJus3X2CFEUtZg-KHnBtsQ&amp;cb_client=search.revgeo_and_fetch.gps&amp;w=1800&amp;h=800&amp;yaw=313.2485&amp;pitch=0&amp;thumbfov=100</imagem>
+  </marcador>
+</marcadores>

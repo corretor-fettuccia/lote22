@@ -1,0 +1,266 @@
+/**
+ * ============================================================
+ * SISTEMA: Mapa Interativo - Implantação
+ * AUTOR: Roberto de Paula Fettuccia
+ * CONTATO: (51) 99811-1078 | corretor.fettuccia@gmail.com
+ * LICENÇA: Código proprietário - Todos os direitos reservados
+ * ============================================================
+ * ATENÇÃO: Este software é protegido por leis de direitos autorais.
+ * A reprodução, distribuição, modificação ou uso não autorizado
+ * está sujeito a sanções legais (Lei 9.610/98).
+ * ============================================================
+ */
+ * { -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; height: 100vh; overflow: hidden; font-family: Arial, sans-serif; }
+        #map { width: 100%; height: 100%; }
+        
+        .btn-back {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 999;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-back:active { transform: scale(0.96); }
+        
+        .label-top {
+            position: abso🏷️ LOTElute;
+            top: 12px;
+            right: 12px;
+            z-index: 999;
+            color: #2561bd;
+            font-size: 11px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            pointer-events: none;
+        }
+        
+        .label-top strong { color: #000000; }
+        
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            padding: 12px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px);
+            color: #fff;
+            font-size: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .brand { color: #00ffff; font-weight: 600; }
+        .phone { color: #25D366; text-decoration: none; margin-left: 8px; }
+        
+        /* Controle de zoom */
+        .leaflet-left { left: 20px !important; right: auto !important; }
+        .leaflet-top { top: 50% !important; transform: translateY(-50%) !important; bottom: auto !important; }
+        
+        .leaflet-control-zoom a {
+            width: 44px !important;
+            height: 44px !important;
+            line-height: 42px !important;
+            font-size: 20px !important;
+            font-weight: bold !important;
+            background: rgba(0,0,0,0.75) !important;
+            backdrop-filter: blur(10px);
+            color: white !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            border-radius: 10px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        /* POPUP ESTILIZADO */
+        .custom-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.692);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            z-index: 2000;
+            width: 90%;
+            max-width: 450px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid #7a7a7a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: popupIn 0.3s ease-out;
+        }
+        
+        @keyframes popupIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .popup-header {
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            padding: 5px;
+            border-radius: 5px 5px 0 0;
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .popup-close {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .popup-close:active { transform: scale(0.9); }
+        .popup-content { padding: 20px; }
+        
+        /* CARROSSEL */
+        .carousel-container {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #111;
+        }
+        
+        .carousel-images {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-image {
+            min-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            background: #000;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+        }
+        
+        .carousel-btn:active { background: #000000; color: #000; }
+        .carousel-prev { left: 10px; }
+        .carousel-next { right: 10px; }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .indicator {
+            width: 8px;info
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .indicator.active {
+            background: #ffffff;
+            width: 20px;
+            border-radius: 4px;
+        }
+        
+        .info-row {
+            margin-bottom: 5px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.185);
+            border-radius: 10px;
+        }
+        
+        .info-label {
+            color: hsl(0, 0%, 100%);
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-value {
+            color: white;
+            font-size: 14px;
+            word-break: break-word;
+        }
+        
+        .divider-line {
+            height: 1px;
+            background: rgb(255, 255, 255);
+            margin: 5px 0;
+        }
+        info
+        /* ANIMAÇÃO */
+        @keyframes pulseBolinha {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+            50% { transform: scale(0.9); opacity: 0.95; box-shadow: 0 0 0 4px currentColor; }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+        }
+
+        .leaflet-marker-icon div {
+            animation: pulseBolinha 3s ease-in-out infinite !important;
+            transform-origin: center;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            z-index: 3000;
+            font-weight: bold;
+            border: 1px solid #000000;
+        }
+        
+        @media (max-width: 600px) {
+            .leaflet-control-zoom a { width: 56px !important; height: 56px !important; font-size: 24px !important; }
+            .custom-popup { width: 95%; max-height: 85vh; }
+        }
