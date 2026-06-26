@@ -1,0 +1,255 @@
+/* Menu Premium - Efeito 3D Sem Brilho */
+.menuPremium__ {
+    /* Paleta de cores refinada */
+    --menuPremium-azul: #0a1628;
+    --menuPremium-azul-escuro: #060f1c;
+    --menuPremium-ouro-base: #d4af37;
+    --menuPremium-ouro-escuro: #aa7c11;
+    --menuPremium-ouro-sutil: #c9a847;
+    
+    /* Variáveis de design */
+    --menuPremium-bg-difuso: rgba(10, 22, 40, 0.82);
+    --menuPremium-blur: 16px;
+    --menuPremium-bg-solido: rgba(6, 15, 28, 0.98);
+    --menuPremium-cor-texto: rgba(255, 255, 255, 0.85);
+    --menuPremium-sombra: 0 8px 28px rgba(0, 0, 0, 0.3);
+    --menuPremium-transicao: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --menuPremium-altura: 76px;
+    --menuPremium-altura-scroll: 64px;
+    --menuPremium-fonte: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    font-family: var(--menuPremium-fonte);
+    transition: var(--menuPremium-transicao);
+    height: var(--menuPremium-altura);
+    
+    background: var(--menuPremium-bg-difuso);
+    backdrop-filter: blur(var(--menuPremium-blur));
+    -webkit-backdrop-filter: blur(var(--menuPremium-blur));
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Estado sólido no scroll */
+.menuPremium__.solid {
+    background: var(--menuPremium-bg-solido);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: var(--menuPremium-sombra);
+    height: var(--menuPremium-altura-scroll);
+}
+
+.menuPremium__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.menuPremium__logo a {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    color: var(--menuPremium-ouro-base);
+    transition: var(--menuPremium-transicao);
+}
+
+.menuPremium__logo span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.menuPremium__logo a:hover {
+    transform: translateY(-1px);
+}
+
+/* Navegação desktop */
+.menuPremium__list {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.menuPremium__list li a {
+    text-decoration: none;
+    color: var(--menuPremium-cor-texto);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--menuPremium-transicao);
+    padding: 0.5rem 0;
+    position: relative;
+    letter-spacing: 0.01em;
+}
+
+/* EFEITO 3D SUBINDO COM RELEVO - SEM BRILHO */
+.menuPremium__list li a:hover {
+    color: var(--menuPremium-ouro-base);
+    transform: translateY(-2px);
+    text-shadow: 
+        0 1px 0 rgba(170, 124, 17, 0.25),
+        0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Fio de ouro no hover */
+.menuPremium__list li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--menuPremium-ouro-base), var(--menuPremium-ouro-sutil));
+    transition: width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border-radius: 2px;
+}
+
+.menuPremium__list li a:hover::after {
+    width: 100%;
+}
+
+/* Botão CTA */
+.menuPremium__list li:last-child a {
+    background: transparent;
+    padding: 0.5rem 1.6rem;
+    border-radius: 40px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.menuPremium__list li:last-child a::after {
+    display: none;
+}
+
+.menuPremium__list li:last-child a:hover {
+    border-color: var(--menuPremium-ouro-base);
+    background: rgba(212, 175, 55, 0.06);
+    transform: translateY(-2px);
+}
+
+/* Hamburger menu */
+.menuPremium__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 10000;
+    width: 44px;
+    height: 44px;
+    transition: var(--menuPremium-transicao);
+}
+
+.menuPremium__hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 5px auto;
+    background-color: var(--menuPremium-ouro-base);
+    transition: var(--menuPremium-transicao);
+    opacity: 0.85;
+}
+
+.menuPremium__hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menuPremium__hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuPremium__hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -7px);
+}
+
+/* Menu mobile */
+@media (max-width: 768px) {
+    .menuPremium__ {
+        --menuPremium-altura: 66px;
+        --menuPremium-altura-scroll: 60px;
+    }
+    
+    .menuPremium__container {
+        padding: 0 1.25rem;
+    }
+    
+    .menuPremium__hamburger {
+        display: block;
+    }
+    
+    .menuPremium__menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--menuPremium-azul);
+        transition: right 0.3s ease-out;
+        z-index: 999;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+        border-left: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .menuPremium__.solid .menuPremium__menu {
+        background: var(--menuPremium-azul-escuro);
+    }
+    
+    .menuPremium__menu.active {
+        right: 0;
+    }
+    
+    .menuPremium__list {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100%;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .menuPremium__list li a {
+        font-size: 1.15rem;
+        padding: 0.35rem 0;
+    }
+    
+    .menuPremium__list li a:hover {
+        transform: translateX(4px) translateY(-1px);
+    }
+    
+    .menuPremium__list li:last-child a {
+        margin-top: 0.5rem;
+        text-align: center;
+        width: auto;
+        padding: 0.6rem 1.8rem;
+    }
+    
+    .menuPremium__list li:last-child a:hover {
+        transform: translateX(0) translateY(-2px);
+    }
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f30 100%);
+    min-height: 100vh;
+}
+
+main section:first-child {
+    padding-top: var(--menuPremium-altura);
+}

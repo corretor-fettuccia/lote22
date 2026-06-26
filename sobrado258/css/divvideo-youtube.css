@@ -1,0 +1,47 @@
+:root {
+  --dv-youtube-blur: 16px;
+  --dv-youtube-overlay-start: rgba(12,45,63,0.4);
+  --dv-youtube-overlay-end: rgba(12,45,63,0.85);
+}
+
+.dv-youtube {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.dv-youtube-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -2;
+  filter: blur(var(--dv-youtube-blur));
+  transform: scale(1.05);
+}
+
+.dv-youtube-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 200%;
+}
+
+.dv-youtube-container iframe {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border: none;
+}
+
+.dv-youtube-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 35%, var(--dv-youtube-overlay-start), var(--dv-youtube-overlay-end));
+  z-index: -1;
+}

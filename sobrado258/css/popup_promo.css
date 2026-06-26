@@ -1,0 +1,107 @@
+/* popup_promo.css v4.0 – Framework XML */
+.pp-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(var(--pp-overlay-rgb, 0,0,0), 0.72);
+    backdrop-filter: blur(3px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    padding: 18px;
+    animation: pp-fadein 0.22s ease-out;
+}
+.pp-container {
+    position: relative;
+    width: min(92vw, 500px);
+    background: var(--pp-bg, #fff);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.42);
+    overflow: hidden;
+}
+.pp-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(var(--pp-close-rgb, 0,0,0), 0.62);
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 1;
+    transition: background 0.15s;
+}
+.pp-close:hover {
+    background: rgba(var(--pp-close-rgb, 0,0,0), 0.85);
+}
+.pp-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.pp-content {
+    padding: 25px 28px 31px;
+    text-align: left;
+}
+.pp-title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    color: var(--pp-title, #151526);
+    font-weight: 850;
+}
+.pp-subtitle {
+    font-size: 16px;
+    color: var(--pp-text, #2d2d3a);
+    border-left: 3px solid var(--pp-accent, #f97316);
+    padding-left: 12px;
+    margin: 0 0 18px;
+}
+.pp-topics {
+    list-style: none;
+    margin: 0 0 23px;
+    padding: 0;
+}
+.pp-topics li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--pp-text, #2d2d3a);
+}
+.pp-topics li::before {
+    content: '✓';
+    color: var(--pp-accent, #f97316);
+    font-weight: 900;
+}
+.pp-button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(95deg, var(--pp-btn-a, #f97316), var(--pp-btn-b, #ea580c));
+    color: var(--pp-btn-text, #fff);
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 750;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.pp-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+@keyframes pp-fadein {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+@media (max-width: 550px) {
+    .pp-content { padding: 21px; }
+    .pp-title { font-size: 24px; }
+}
