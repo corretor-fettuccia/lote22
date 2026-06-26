@@ -102,6 +102,6 @@
     to { opacity: 1; transform: scale(1); }
 }
 @media (max-width: 550px) {
-    .pp-content { padding: 21px; }
-    .pp-title { font-size: 24px; }
+    .pp-content { padding: 17px; }
+    .pp-title { font-size: 20px; }
 }
