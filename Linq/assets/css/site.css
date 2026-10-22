@@ -229,7 +229,7 @@ section.plugin-play-section[data-plugin="hero360-tour"]{position:relative!import
 /* Navigation toolbar is disabled by default. Only the editor opt-in enables it. */
 [data-plugin="hero360-tour"] .ims360[data-navigation-panel="false"] .ims360-controls{display:none!important}
 
-/* Hero360Tour 1.2.2 — Immersive Motion: opt-in, visually unobtrusive and accessible. */
+/* Hero360Tour 1.2.5 — Immersive Motion: opt-in, visually unobtrusive and accessible. */
 [data-plugin="hero360-tour"] .ims360-motion{position:absolute;right:clamp(18px,4vw,72px);top:64px;z-index:14;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:min(460px,calc(100% - 40px));font:600 12px/1.35 system-ui,sans-serif;color:white}
 [data-plugin="hero360-tour"] .ims360-motion[hidden]{display:none}
 [data-plugin="hero360-tour"] .ims360-motion button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:43px;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:8px 14px;background:rgba(12,23,32,.85);color:white;font:600 12px/1.3 system-ui,sans-serif;backdrop-filter:blur(12px);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.22)}
@@ -248,11 +248,6 @@ section.plugin-play-section[data-plugin="hero360-tour"]{position:relative!import
 [data-plugin="hero360-tour"] .ims360[data-motion-state="no-data"] .ims360-motion-status,
 [data-plugin="hero360-tour"] .ims360[data-motion-state="insecure"] .ims360-motion-status,
 [data-plugin="hero360-tour"] .ims360[data-motion-state="denied"] .ims360-motion-status{color:#ffe7a8;font-weight:650}
-
-/* Hero360Tour 1.2.4 — on-device diagnosis, hidden unless visitor requests it */
-[data-plugin="hero360-tour"] .ims360-motion .ims360-motion-debug-toggle{width:36px;height:36px;min-height:36px;padding:0;border-radius:50%;font-size:15px;background:rgba(12,23,32,.7)}
-[data-plugin="hero360-tour"] .ims360-motion .ims360-motion-debug-output{order:5;flex-basis:100%;width:min(400px,80vw);max-height:240px;overflow:auto;white-space:pre-wrap;text-align:left;font:10px/1.5 ui-monospace,monospace;color:#eaf5ff;background:rgba(7,18,31,.96);padding:12px;border:1px solid rgba(255,255,255,.25);border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
-[data-plugin="hero360-tour"] .ims360-motion .ims360-motion-debug-output[hidden]{display:none}
 
 
 /* Destaques 1.1 — styles are shared by editor preview and exported HTML. */

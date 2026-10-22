@@ -1,7 +1,7 @@
 LANDING PAGE COMPILADA — IMOBIFY STUDIO 6.0.52
 
 Projeto: LINQ Your Life | Minha Casa Minha Vida | Simule e compare
-Gerado em: 21/10/2026, 22:23:21
+Gerado em: 21/10/2026, 23:15:11
 
 PUBLICAÇÃO
 Envie todo o conteúdo desta pasta para a raiz do seu serviço de hospedagem, GitHub Pages, Netlify, Vercel ou servidor web. A página é estática e não exige banco de dados.

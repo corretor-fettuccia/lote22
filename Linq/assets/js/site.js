@@ -305,7 +305,7 @@
 })();
 
 
-/** Hero360Tour v1.2.4 - panorama full viewport, WebGL native, no third-party runtime. */
+/** Hero360Tour v1.2.5 - panorama full viewport, WebGL native, no third-party runtime. */
 (function () {
  'use strict';
  const ID = 'hero360-tour';
@@ -414,8 +414,6 @@
   // DeviceOrientationEvent.requestPermission() must be invoked directly from a user gesture.
   const motionBox=root.querySelector('.ims360-motion');
   const motionButton=motionBox?.querySelector('.ims360-motion-toggle');
-  const motionReset=motionBox?.querySelector('.ims360-motion-recenter');
-  const motionStatus=motionBox?.querySelector('.ims360-motion-status');
   const motionAllowed=root.dataset.motionEnabled==='true';
   const motionTouchEnabled=root.dataset.motionTouch!=='false';
   const motionSensitivity=clamp(root.dataset.motionSensitivity||50,10,100)/50;
@@ -425,43 +423,39 @@
   // Use DeviceOrientation on Safari and Chrome; Chromium Generic Sensor API is the
   // fallback when orientation events are absent or return unusable readings.
   const sensorCapable=typeof window.DeviceOrientationEvent!=='undefined'||typeof window.DeviceMotionEvent!=='undefined'||typeof window.RelativeOrientationSensor==='function'||typeof window.AbsoluteOrientationSensor==='function';
-  const motion={active:false,pending:false,hasReading:false,hasMovement:false,sample:null,anchor:null,base:null,target:null,sceneView:{yaw:0,pitch:0},lastTick:performance.now(),watchdog:null,fallbackTimer:null,generic:null,source:'',readings:0,relativeSeen:false,sources:Object.create(null),rateView:{yaw:0,pitch:0},rateAt:0,startedAt:0};
+  const motion={active:false,pending:false,hasReading:false,hasMovement:false,sample:null,anchor:null,base:null,target:null,sceneView:{yaw:0,pitch:0},lastTick:performance.now(),watchdog:null,fallbackTimer:null,generic:null,source:'',readings:0,relativeSeen:false,sources:Object.create(null),rateView:{yaw:0,pitch:0},rateAt:0,startedAt:0,calibration:null,outlier:null};
   const disposers=[];
-  // Surface the actual raw sensor stream on physical phones. This readout is
-  // deliberately opt-in and local: no telemetry or sensor data is transmitted.
-  let rawOrientation={alpha:null,beta:null,gamma:null},rawRates={alpha:null,beta:null,gamma:null};
-  let rawOrientationCount=0,rawMotionCount=0,rawOrientationInvalid=0;
-  let lastRawReadingAt=0;
-  const debugToggle=motionBox?.querySelector('.ims360-motion-debug-toggle');
-  const debugOutput=motionBox?.querySelector('.ims360-motion-debug-output');
-  let debugOpened=false;
-  function motionDebug(){
-    if(!debugOutput||!debugOpened)return;
-    const policy=document.permissionsPolicy||document.featurePolicy;
-    let policyStatus='desconhecida';
-    try{if(policy?.allowsFeature)policyStatus=['accelerometer','gyroscope'].map(k=>k+': '+String(policy.allowsFeature(k))).join(', ')}catch(_){ }
-    debugOutput.textContent=[
-      'HTTPS: '+String(window.isSecureContext)+' | incorporado: '+String(window.top!==window),
-      'Permissões: '+policyStatus,
-      'Orientação (eventos): '+rawOrientationCount+' | incompletos: '+rawOrientationInvalid,
-      'α '+String(rawOrientation.alpha)+' | β '+String(rawOrientation.beta)+' | γ '+String(rawOrientation.gamma),
-      'Rotação (eventos): '+rawMotionCount,
-      'α '+String(rawRates.alpha)+' | β '+String(rawRates.beta)+' | γ '+String(rawRates.gamma),
-      'Fonte ativa: '+(motion.source||'nenhuma')+' | situação: '+(root.dataset.motionState||'desligado'),
-      'Câmera yaw: '+yaw.toFixed(1)+'° | pitch: '+pitch.toFixed(1)+'°',
-      'Amostras válidas: '+motion.readings+' | mudança: '+String(motion.hasMovement),
-      'Último evento: '+(lastRawReadingAt?(Math.round((performance.now()-lastRawReadingAt)/100)/10+'s atrás'):'nenhum')
-    ].join('\n');
+  // Public UI intentionally has NO debug panel or telemetry overlay.
+  // Gyroscope readings remain local to the browser and never leave the device.
+  function beginCalibration(baseYaw=yaw,basePitch=pitch){
+    // Every scene and every sensor-source change starts with the CURRENT view.
+    // A brief warm-up averages the starting orientation instead of jumping on the
+    // first noisy sensor frame, and then restores normal tracking automatically.
+    motion.anchor=null; motion.base={yaw:baseYaw,pitch:basePitch};
+    motion.target={yaw:baseYaw,pitch:basePitch};
+    motion.calibration={started:performance.now(),count:0,sin:0,cos:0,pitch:0};
+    motion.outlier=null;
   }
-  if(debugToggle&&debugOutput){debugToggle.addEventListener('click',()=>{debugOpened=!debugOpened;debugOutput.hidden=!debugOpened;debugToggle.setAttribute('aria-expanded',String(debugOpened));motionDebug()});}
-
-  function motionMessage(value){if(motionStatus)motionStatus.textContent=value||'';}
+  function calibrateSample(sample){
+    const c=motion.calibration;
+    if(!c)return false;
+    const now=performance.now();
+    // Use short, bounded sampling. Never require visitors to stand still or
+    // leave them in calibration forever on low-frequency devices.
+    c.count++;c.sin+=Math.sin(rad(sample.yaw));c.cos+=Math.cos(rad(sample.yaw));c.pitch+=sample.pitch;
+    if(c.count<4 && now-c.started<220)return true;
+    motion.anchor={yaw:deg(Math.atan2(c.sin,c.cos)),pitch:c.pitch/c.count};
+    motion.calibration=null;
+    motion.target={...motion.base};
+    return true;
+  }
+  function motionMessage(value){ /* A interface pública apresenta apenas o botão. */ }
   function motionState(state,message){root.dataset.motionState=state;if(message!==undefined)motionMessage(message);}
   function motionSync(){
     if(motionButton){motionButton.setAttribute('aria-pressed',String(motion.active));
       const title=motionButton.querySelector('span');if(title)title.textContent=motion.active?'Desativar movimento':'Explorar em 360°';
       motionButton.disabled=motion.pending;}
-    if(motionReset)motionReset.hidden=!motion.active||root.dataset.motionRecenter==='false';
+
   }
   function multiplyQuat(a,b){return {x:a.w*b.x+a.x*b.w+a.y*b.z-a.z*b.y,y:a.w*b.y-a.x*b.z+a.y*b.w+a.z*b.x,z:a.w*b.z+a.x*b.y-a.y*b.x+a.z*b.w,w:a.w*b.w-a.x*b.x-a.y*b.y-a.z*b.z};}
   function quaternionView(q){
@@ -478,7 +472,7 @@
   }
   function motionAnchor(baseYaw=yaw,basePitch=pitch){
     if(!motion.sample)return;
-    motion.anchor={...motion.sample};motion.base={yaw:baseYaw,pitch:basePitch};motion.target={yaw:baseYaw,pitch:basePitch};
+    motion.anchor={...motion.sample};motion.base={yaw:baseYaw,pitch:basePitch};motion.target={yaw:baseYaw,pitch:basePitch};motion.calibration=null;motion.outlier=null;
   }
   // Keep evidence from EACH sensor source. Android can emit frozen DeviceOrientation
   // values while Generic Sensor or DeviceMotion continues producing real readings.
@@ -499,14 +493,14 @@
     const use=!motion.source||source===motion.source||(moving&&(chosenStale||(sourceRank[source]>sourceRank[motion.source]&&now-(chosen.lastChanged||0)>400)));
     if(!use)return;
     if(motion.source!==source){
-      motion.source=source;motion.anchor=null;motion.base=null;motion.target=null;
+      motion.source=source;beginCalibration(yaw,pitch);
       root.dataset.motionSource=source;
     }
     motion.hasReading=true;motion.readings++;motion.sample={...sample};
     if(moving)motion.hasMovement=true;
     root.dataset.motionReadings=String(motion.readings);
     root.dataset.motionChanges=String(entry.changes);
-    if(!motion.anchor)motionAnchor(yaw,pitch);
+    if(!motion.anchor){calibrateSample(sample);return;}
     // Only real movement cancels the fallback and no-motion diagnostics.
     if(moving){
       if(motion.watchdog){clearTimeout(motion.watchdog);motion.watchdog=null;}
@@ -518,30 +512,46 @@
     }
     if(pointer)return;
     const a=motion.anchor,b=motion.base;
-    motion.target={yaw:wrap(b.yaw+wrap(sample.yaw-a.yaw)*motionSensitivity),pitch:clamp(b.pitch+(sample.pitch-a.pitch)*motionSensitivity,-80,80)};
+    // Heading is mathematically unstable as the phone points almost vertically.
+    // Preserve last valid heading near the pole to avoid 180° flips.
+    const nearPole=Math.abs(sample.pitch)>76;
+    const currentYaw=nearPole?(motion.lastSafeYaw??a.yaw):sample.yaw;
+    if(!nearPole)motion.lastSafeYaw=sample.yaw;
+    let targetYaw=wrap(b.yaw+wrap(currentYaw-a.yaw)*motionSensitivity);
+    let targetPitch=clamp(b.pitch+(sample.pitch-a.pitch)*motionSensitivity,-80,80);
+    // Reject one-frame glitches but accept a sustained real movement on the
+    // following frame. This prevents camera snaps caused by sensor fusion.
+    const prior=motion.target||{yaw,pitch};
+    const jump=Math.max(Math.abs(wrap(targetYaw-prior.yaw)),Math.abs(targetPitch-prior.pitch));
+    const elapsed=now-(motion.lastTargetAt||now);
+    if(jump>42 && elapsed<160){
+      if(!motion.outlier || Math.abs(wrap(motion.outlier.yaw-targetYaw))>12 || Math.abs(motion.outlier.pitch-targetPitch)>12){
+        motion.outlier={yaw:targetYaw,pitch:targetPitch};return;
+      }
+    }
+    motion.outlier=null;motion.lastTargetAt=now;
+    // Sub-degree jitter does not need to trigger another re-render. Avoid
+    // fighting genuine slow intentional motion by comparing with the last target.
+    if(Math.abs(wrap(targetYaw-prior.yaw))<.16)targetYaw=prior.yaw;
+    if(Math.abs(targetPitch-prior.pitch)<.16)targetPitch=prior.pitch;
+    motion.target={yaw:targetYaw,pitch:targetPitch};
   }
   function motionRead(event){
     // Do not throw away Android readings with a null axis. Browsers may send
     // alpha but omit a tilt axis; preserve last known values, then calibrate.
-    rawOrientationCount++;lastRawReadingAt=performance.now();
-    rawOrientation={alpha:event.alpha,beta:event.beta,gamma:event.gamma};
     const a=Number.isFinite(event.alpha)?event.alpha:null;
     const b=Number.isFinite(event.beta)?event.beta:null;
     const g=Number.isFinite(event.gamma)?event.gamma:null;
-    if(a===null&&b===null&&g===null){rawOrientationInvalid++;motionDebug();return;}
-    if(b===null||g===null)rawOrientationInvalid++;
+    if(a===null&&b===null&&g===null)return;
     const cached=motion.lastAngles||{};
     const values={alpha:a??cached.alpha??0,beta:b??cached.beta??(Math.abs(window.screen?.orientation?.angle||0)%180===90?0:90),gamma:g??cached.gamma??0};
     motion.lastAngles=values;
     motionSample(deviceAngles(values.alpha,values.beta,values.gamma),event.type==='deviceorientationabsolute'?'deviceorientationabsolute':'deviceorientation');
-    motionDebug();
   }
   function motionRateRead(event){
     if(!motion.active||!visible||document.hidden)return;
     const rate=event.rotationRate;
-    rawMotionCount++;lastRawReadingAt=performance.now();
-    if(rate)rawRates={alpha:rate.alpha,beta:rate.beta,gamma:rate.gamma};
-    if(!rate){motionDebug();return;}
+    if(!rate)return;
     const horizontal=Number(rate.gamma),vertical=Number(rate.beta);
     if(!Number.isFinite(horizontal)&&!Number.isFinite(vertical))return;
     const now=performance.now(),duration=motion.rateAt?Math.min(.08,Math.max(0,(now-motion.rateAt)/1000)):0;
@@ -563,7 +573,6 @@
     if(Math.max(Math.abs(yawRate),Math.abs(pitchRate))>1.2){
       motionSample(motion.rateView,'rotationRate');
     }
-    motionDebug();
   }
   function motionGenericStop(){
     if(motion.generic){try{motion.generic.stop()}catch(_){ }motion.generic=null;}
@@ -589,7 +598,7 @@
     }catch(error){console.warn('[Hero360Tour] Sensor alternativo:',error);motionGenericStop();}
   }
   function motionStop(message='',state='off'){
-    motion.active=false;motion.pending=false;motion.anchor=null;motion.base=null;motion.target=null;motion.hasReading=false;motion.hasMovement=false;motion.sample=null;motion.relativeSeen=false;motion.source='';motion.sources=Object.create(null);motion.rateAt=0;
+    motion.active=false;motion.pending=false;motion.anchor=null;motion.base=null;motion.target=null;motion.hasReading=false;motion.hasMovement=false;motion.sample=null;motion.relativeSeen=false;motion.source='';motion.sources=Object.create(null);motion.rateAt=0;motion.calibration=null;motion.outlier=null;
     if(motion.watchdog){clearTimeout(motion.watchdog);motion.watchdog=null;}
     if(motion.fallbackTimer){clearTimeout(motion.fallbackTimer);motion.fallbackTimer=null;}
     window.removeEventListener('deviceorientation',motionRead);
@@ -622,13 +631,13 @@
         if(results.every(result=>result.status!=='fulfilled'||result.value!=='granted'))throw Error('Permissões de movimento negadas');
       }
       motion.active=true;motion.hasReading=false;motion.hasMovement=false;motion.relativeSeen=false;
-      motion.anchor=null;motion.target=null;motion.sample=null;motion.readings=0;
+      motion.anchor=null;motion.target=null;motion.sample=null;motion.readings=0;motion.lastSafeYaw=null;motion.lastTargetAt=0;
       motion.source='';motion.sources=Object.create(null);motion.lastAngles=null;motion.startedAt=performance.now();motion.rateAt=0;motion.rateView={yaw:0,pitch:0};motion.pending=false;
       root.dataset.motionSource='';root.dataset.motionReadings='0';root.dataset.motionChanges='0';
       window.addEventListener('deviceorientation',motionRead,{passive:true});
       window.addEventListener('deviceorientationabsolute',motionRead,{passive:true});
       window.addEventListener('devicemotion',motionRateRead,{passive:true});
-      motionSync();motionState('waiting','Mova o aparelho para verificar se o sensor responde.');
+      beginCalibration(yaw,pitch);motionSync();motionState('waiting','');
       // A fixed DeviceOrientation stream must NOT prevent Generic Sensor from
       // starting; this was the source starvation bug affecting some Androids.
       motion.fallbackTimer=setTimeout(()=>{if(motion.active&&!motion.hasMovement)motionGenericStart();},1500);
@@ -639,12 +648,6 @@
       },7000);
     }catch(error){console.warn('[Hero360Tour] Acesso a movimento:',error);motionStop('Permissão de movimento não concedida. Verifique as permissões do navegador.','denied');}
   }
-  function motionRecalibrate(){
-    if(!motion.active)return;
-    const base=motion.sceneView;
-    yaw=base.yaw;pitch=base.pitch;transition=null;motionAnchor(base.yaw,base.pitch);dirty=true;stopIdle();
-    motionMessage('Visão recentralizada.');
-  }
   if(motionBox){
     motionBox.hidden=!(motionAllowed&&coarse);
     if(motionAllowed&&coarse&&!window.isSecureContext)motionState('insecure','Abra a página em HTTPS para usar movimento.');
@@ -652,8 +655,7 @@
     else if(motionAllowed&&coarse&&!sensorCapable)motionState('unsupported','Sensor de orientação indisponível neste navegador.');
   }
   if(motionButton)motionButton.addEventListener('click',()=>{if(motion.active)motionStop();else motionStart();});
-  if(motionReset)motionReset.addEventListener('click',motionRecalibrate);
-  function handleScreenRotation(){if(motion.active){motion.anchor=null;motion.target=null;motion.rateView={yaw:0,pitch:0};motion.rateAt=0;dirty=true;motionMessage('Orientação alterada. Recalibrando…');}}
+  function handleScreenRotation(){if(motion.active){beginCalibration(yaw,pitch);motion.rateView={yaw:0,pitch:0};motion.rateAt=0;dirty=true;}}
   on(window,'orientationchange',handleScreenRotation);
   if(window.screen?.orientation?.addEventListener)on(window.screen.orientation,'change',handleScreenRotation);
   motionSync();
@@ -719,7 +721,7 @@
     const s=scenes[id];sceneId=id;label.textContent=s.title||id;
     resetHero();stopIdle();transition=null;
     const v=targetView||s.initialView||{};yaw=Number.isFinite(Number(v.yaw))?wrap(Number(v.yaw)):0;pitch=clamp(v.pitch??0,-80,80);hfov=clamp(v.hfov??root.dataset.heroHfov??118,50,140);
-    motion.sceneView={yaw,pitch};motion.anchor=null;motion.target=null;
+    motion.sceneView={yaw,pitch};if(motion.active)beginCalibration(yaw,pitch);else {motion.anchor=null;motion.target=null;}
     hotspots=[];hotspotLayer.replaceChildren();
     for(const spot of s.hotspots||[]){
       const el=document.createElement('div');el.className='ims360-hotspot-shell';el.dataset.hotspotId=spot.id||'';el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',spot.text||'Ponto de interesse');
@@ -800,10 +802,10 @@
   function tick(t){if(disposed)return;
     const sensorTickTime=t;
     if(transition){const e=transition.duration?clamp((t-transition.start)/transition.duration,0,1):1,sm=e*e*(3-2*e);yaw=wrap(transition.from.yaw+(transition.to.yaw-transition.from.yaw)*sm);pitch=transition.from.pitch+(transition.to.pitch-transition.from.pitch)*sm;hfov=transition.from.hfov+(transition.to.hfov-transition.from.hfov)*sm;dirty=true;if(e>=1){transition=null;if(motion.active)motionAnchor(yaw,pitch);}}
-    else if(motion.active&&motion.target&&visible&&!document.hidden&&!pointer){const dt=Math.min(80,Math.max(1,t-motion.lastTick));const tau=motionSmoothing===0?0:12+motionSmoothing*3.0;const k=tau===0?1:1-Math.exp(-dt/tau);yaw=wrap(yaw+wrap(motion.target.yaw-yaw)*k);pitch=clamp(pitch+(motion.target.pitch-pitch)*k,-80,80);dirty=true;}
+    else if(motion.active&&motion.target&&visible&&!document.hidden&&!pointer){const dt=Math.min(80,Math.max(1,t-motion.lastTick));const errorSize=Math.max(Math.abs(wrap(motion.target.yaw-yaw)),Math.abs(motion.target.pitch-pitch));const tau=motionSmoothing===0?0:Math.max(16,(25+motionSmoothing*1.2)/(1+errorSize/12));const k=tau===0?1:1-Math.exp(-dt/tau);yaw=wrap(yaw+wrap(motion.target.yaw-yaw)*k);pitch=clamp(pitch+(motion.target.pitch-pitch)*k,-80,80);dirty=true;}
     else if(!motion.active&&!reduced?.matches&&visible&&t-interactionAt>=idleMs){if(!idleAnchor)idleAnchor={t,yaw,pitch};const dt=(t-idleAnchor.t)/cycleMs*Math.PI*2;yaw=wrap(idleAnchor.yaw+Math.sin(dt)*swayYaw);pitch=clamp(idleAnchor.pitch+Math.sin(dt*.63)*swayPitch,-80,80);dirty=true;}
     motion.lastTick=sensorTickTime;
-    if(motion.active){root.dataset.motionViewYaw=yaw.toFixed(2);root.dataset.motionViewPitch=pitch.toFixed(2);if(debugOpened&&Math.round(t/400)!==Math.round((t-16)/400))motionDebug();}
+
     if(visible&&dirty&&(gl||t-engine.lastDraw>115))render();frame=requestAnimationFrame(tick);
   }
   // Gesture arbitration: page scrolling always wins over vertical touch gestures.

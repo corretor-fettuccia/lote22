@@ -133,7 +133,7 @@
         "ctaLabel": "Garantir minha unidade",
         "ctaUrl": "#contato",
         "heightDesktop": 760,
-        "heightMobile": 820,
+        "heightMobile": 580,
         "overlayOpacity": 20,
         "accentColor": "#dec49b",
         "textColor": "#ffffff",
@@ -150,8 +150,7 @@
         "motionActivation": "auto",
         "motionTouchFallback": true,
         "motionSensitivity": 50,
-        "motionSmoothing": 65,
-        "motionRecenter": true
+        "motionSmoothing": 50
       },
       "settings": {
         "visible": true,
@@ -1008,7 +1007,7 @@
     }
   ],
   "selectedSectionId": "hero360-tour-1792586326792-cbk90",
-  "updatedAt": "2026-10-22T01:23:16.744Z",
+  "updatedAt": "2026-10-22T02:14:43.678Z",
   "templateMeta": {
     "presetId": "mcmv-imovel-na-planta",
     "category": "Financiamento",

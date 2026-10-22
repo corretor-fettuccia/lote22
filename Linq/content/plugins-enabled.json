@@ -5,7 +5,7 @@
     "type": "section",
     "compositionRole": "section",
     "compositionCardinality": "multiple",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "source": "plugins/hero360-tour/plugin.json",
     "packageType": "bundled"
   },
