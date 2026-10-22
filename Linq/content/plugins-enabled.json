@@ -1,0 +1,122 @@
+[
+  {
+    "id": "hero360-tour",
+    "name": "Hero360Tour",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.2.4",
+    "source": "plugins/hero360-tour/plugin.json",
+    "packageType": "bundled"
+  },
+  {
+    "id": "highlights",
+    "name": "Destaques",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/highlights/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "info-objetiva",
+    "name": "Informações objetivas",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/info-objetiva/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "benefits-showcase",
+    "name": "Benefits Showcase",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/benefits-showcase/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "gallery-big-four",
+    "name": "Galeria Big Four",
+    "type": "section",
+    "compositionRole": "both",
+    "compositionCardinality": "multiple",
+    "version": "2.3.0",
+    "source": "plugins/gallery-big-four/plugin.json",
+    "packageType": "bundled"
+  },
+  {
+    "id": "location",
+    "name": "Localização",
+    "type": "section",
+    "compositionRole": "both",
+    "compositionCardinality": "multiple",
+    "version": "1.1.0",
+    "source": "plugins/location/plugin.json",
+    "packageType": "bundled"
+  },
+  {
+    "id": "payment",
+    "name": "Condições de pagamento",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/payment/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "faq",
+    "name": "Perguntas frequentes",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/faq/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "agendamento-sender",
+    "name": "Agendamento Sender",
+    "type": "section",
+    "compositionRole": "both",
+    "compositionCardinality": "multiple",
+    "version": "1.3.0",
+    "source": "plugins/agendamento-sender/plugin.json",
+    "packageType": "bundled"
+  },
+  {
+    "id": "footer",
+    "name": "Rodapé profissional",
+    "type": "section",
+    "compositionRole": "section",
+    "compositionCardinality": "multiple",
+    "version": "1.1.2",
+    "source": "plugins/footer/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "reveal",
+    "name": "Revelação no scroll",
+    "type": "behavior",
+    "compositionRole": "behavior",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/reveal/plugin.json",
+    "packageType": "core"
+  },
+  {
+    "id": "lightbox",
+    "name": "Lightbox de galeria",
+    "type": "behavior",
+    "compositionRole": "behavior",
+    "compositionCardinality": "multiple",
+    "version": "1.0.0",
+    "source": "plugins/lightbox/plugin.json",
+    "packageType": "core"
+  }
+]
