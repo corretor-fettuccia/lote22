@@ -1,0 +1,99 @@
+/* ============================================================
+   carrosel_places.css  –  Estilos do Carrossel Places (gerado)
+   Prefixo: carrosel_places_
+   ============================================================ */
+
+.carrosel_places_viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  
+  height: 210px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #e3e9f0;
+  display: flex;
+  align-items: center;
+  padding: 0 0.3rem;
+}
+
+.carrosel_places_track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+  transition: none;
+  align-items: center;
+  height: 100%;
+}
+
+.carrosel_places_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 120px;
+  height: 100%;
+  user-select: none;
+}
+
+.carrosel_places_thumb {
+  width: 120px;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #cbd5e1;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  display: block;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.carrosel_places_thumb:hover {
+  border-color: #3b8cbf;
+}
+
+.carrosel_places_label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #1e3b4f;
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.3;
+  max-width: 120px;
+  white-space: normal;
+  word-wrap: break-word;
+  background: rgba(255,255,255,0.7);
+  padding: 0 4px;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+
+.carrosel_places_viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(227, 233, 240,0.35) 0%, transparent 8%, transparent 92%, rgba(227, 233, 240,0.35) 100%);
+  border-radius: 16px;
+}
+
+@media (max-width: 700px) {
+  .carrosel_places_viewport { height: 168px; }
+  .carrosel_places_item { width: 90px; }
+  .carrosel_places_thumb { width: 90px; height: 135px; }
+  .carrosel_places_label { max-width: 90px; font-size: 0.5525rem; }
+  .carrosel_places_track { gap: 10px; }
+}
+
+@media (max-width: 450px) {
+  .carrosel_places_viewport { height: 137px; }
+  .carrosel_places_item { width: 66px; }
+  .carrosel_places_thumb { width: 66px; height: 99px; }
+  .carrosel_places_label { max-width: 66px; font-size: 0.45499999999999996rem; }
+  .carrosel_places_track { gap: 7px; }
+}

@@ -1,0 +1,201 @@
+/* flipcard.4.0.css - Efeito 3D com hover + click/toque */
+
+.flip-card {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    width: 320px;
+    height: 420px;
+    cursor: pointer;
+}
+
+
+
+.flip-card__front,
+.flip-card__back {
+   background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.flip-card__front {
+    background-color: #2c3e66;
+}
+
+.flip-card__back {
+    
+    background: #5d758b;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+
+    background-size: cover;
+    background-position: center;
+}
+
+/* Overlay escuro (igual ao original) */
+.flip-card__front:after,
+.flip-card__back:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    display: block;
+    opacity: 0.6;
+    background-color: #222222ab;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Conteúdo interno com elevação 3D */
+.flip-card__inner {
+    -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+    transform: translateY(-50%) translateZ(60px) scale(0.94);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+    -webkit-perspective: inherit;
+    perspective: inherit;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+/* v4 híbrida: hover + click/toque.
+   Desktop: vira no hover.
+   Desktop/Mobile: vira no click por meio da classe .flipped.
+   O efeito 3D permanece preservado com perspective, preserve-3d e translateZ. */
+
+/* Hover desktop */
+@media (hover: hover) {
+    .flip-card:hover .flip-card__front {
+        -webkit-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+    }
+
+    .flip-card:hover .flip-card__back {
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+}
+
+/* Classe .flipped para click/toque (adicionada pelo JS) */
+.flip-card.flipped .flip-card__front {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+.flip-card.flipped .flip-card__back {
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+
+/* Estilos auxiliares para conteúdo */
+.flip-card__icon {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+}
+.flip-card__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.flip-card__desc {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+.flip-card__highlight {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 5px 12px;
+    border-radius: 40px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.flip-card__badge {
+    background: rgba(255,255,255,0.2);
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    display: inline-block;
+}
+.flip-card__list {
+    list-style: none;
+    text-align: left;
+    margin: 15px 0;
+    padding-left: 0;
+}
+.flip-card__list li {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+.flip-card__list li i {
+    width: 20px;
+    color: #fbbf24;
+}
+.btn-flip {
+    background: #f59e0b;
+    border: none;
+    color: #0f172a;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-flip:hover {
+    background: #ffb347;
+    transform: scale(1.02);
+}
+
+.btn-flipFake {
+    background: #f59e0b;
+    border: none;
+    color: #0f172a;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-flipFake:hover {
+    background: #ffb347;
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .flip-card {
+        width: 280px;
+        height: auto;
+        aspect-ratio: 320 / 420;
+    }
+}

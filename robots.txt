@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lote22.com.br/sitemap.xml

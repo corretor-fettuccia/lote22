@@ -1,0 +1,327 @@
+/* ========== businessbranding.css aprimorado ========== */
+    .businessbranding-module * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .businessbranding-module {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      background: #0b0b0b;
+      padding: clamp(60px, 10vw, 120px) 0 clamp(80px, 12vw, 160px);
+      overflow-x: hidden;
+      display: block;
+      margin: 0;
+      border: none;
+    }
+    .bb-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .bb-bg canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .bb-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 40px);
+    }
+    .bb-quotes {
+      position: relative;
+      width: 100%;
+      height: 0;
+      pointer-events: none;
+    }
+    .bb-quote-1, .bb-quote-2 {
+      position: absolute;
+      opacity: 0.6;
+      z-index: 1;
+    }
+    .bb-quote-1 {
+      top: -30px;
+      left: -10px;
+      width: min(180px, 25vw);
+    }
+    .bb-quote-2 {
+      bottom: -40px;
+      right: -10px;
+      width: min(180px, 25vw);
+    }
+    .bb-quote-1 img, .bb-quote-2 img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .bb-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(30px, 8vw, 60px);
+    }
+    .bb-content {
+      flex: 1.2;
+      min-width: 260px;
+      width: 100%;
+    }
+    .bb-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .bb-arrow {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 3vw, 15px);
+    }
+    .bb-prev, .bb-next {
+      background: none;
+      border: none;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      cursor: pointer;
+      color: #ccb78b;
+      transition: transform 0.2s, color 0.2s;
+      line-height: 1;
+      padding: 5px;
+    }
+    .bb-arrow-label {
+      font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #aaa;
+      font-weight: 500;
+    }
+    .bb-read-all a {
+      color: #ccb78b;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      letter-spacing: 1px;
+      border-bottom: 1px solid #ccb78b;
+      padding-bottom: 4px;
+      transition: color 0.2s;
+    }
+    .bb-read-all a:hover {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    /* Carrossel com efeito WIPE */
+    .bb-slider {
+      width: 100%;
+      position: relative;
+    }
+    .bb-slides-container {
+      overflow: hidden;
+      border-radius: 24px;
+      position: relative;
+    }
+    .bb-slides-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform;
+    }
+    /* Efeito wipe nos slides individuais (opacidade + escala sutil) */
+    .bb-slide {
+      flex: 0 0 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Classe para animação de entrada (usada no JS) */
+    .bb-slide.wipe-in {
+      animation: wipeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+    @keyframes wipeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+        clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      }
+    }
+    .bb-card {
+      background: rgba(20, 20, 20, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: clamp(30px, 6vw, 48px) clamp(24px, 5vw, 40px);
+      border: 1px solid rgba(204, 183, 139, 0.3);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+    }
+    .bb-card p {
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      line-height: 1.4;
+      color: #f5f5f5;
+      margin-bottom: 28px;
+      letter-spacing: -0.2px;
+    }
+    .bb-author {
+      display: block;
+      font-size: clamp(0.8rem, 2.8vw, 1rem);
+      font-weight: 600;
+      color: #ccb78b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid #ccb78b;
+      padding-left: 16px;
+    }
+    .bb-slick-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .bb-slick-arrows {
+      display: flex;
+      gap: 15px;
+    }
+    .bb-slick-arrow {
+      background: transparent;
+      border: 1px solid #ccb78b;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      color: #ccb78b;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bb-slick-arrow:hover {
+      background: #ccb78b;
+      color: #0b0b0b;
+    }
+    .bb-btn .global-btn {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #ccb78b;
+      padding: 10px 24px;
+      color: #ccb78b;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      white-space: nowrap;
+    }
+    .bb-btn .global-btn:hover {
+      background: #ccb78b;
+      color: #0b0b0b;
+    }
+    .bb-head {
+      flex: 0.8;
+      min-width: 260px;
+      text-align: right;
+    }
+.bb-head::before {
+    content: "";
+    position: absolute;
+
+    top: -40px;
+    right: -40px;
+    bottom: -40px;
+    left: -40px;
+
+    background: rgba(0,0,0,.35);
+    filter: blur(35px);
+
+    z-index: -1;
+    pointer-events: none;
+}
+
+    .bb-name {
+      font-size: clamp(2.2rem, 8vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+  
+      color: #ffffff;
+      margin-bottom: 15px;
+     
+    }
+    .bb-name span {
+      display: block;
+      font-size: clamp(1rem, 4vw, 1.8rem);
+      font-weight: 400;
+      color: #ccb78b;
+      letter-spacing: 2px;
+    }
+    .bb-name em {
+      font-style: normal;
+      color: #ccb78b;
+    }
+    .bb-site-title {
+      margin-top: 15px;
+    }
+    .typing-text {
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
+      font-weight: 400;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      border-right: 2px solid #ccb78b;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blinkCursor 0.8s step-end infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { border-color: #ccb78b; }
+      50% { border-color: transparent; }
+    }
+    .bb-site-title span i {
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: #ccb78b;
+    }
+    @media (max-width: 992px) {
+      .bb-inner { flex-direction: column-reverse; }
+      .bb-head { text-align: center; width: 100%; margin-bottom: 20px; }
+      .bb-site-title span { justify-content: center; }
+      .bb-quote-1 { top: -20px; left: -5px; }
+      .bb-quote-2 { bottom: -30px; right: -5px; }
+      .typing-text { white-space: normal; border-right: none; animation: none; }
+    }
+    @media (max-width: 768px) {
+      .businessbranding-module { padding: 40px 0 70px; }
+      .bb-links { margin-bottom: 25px; }
+      .bb-card { padding: 28px 20px; }
+      .bb-slick-arrow { width: 38px; height: 38px; font-size: 1.3rem; }
+      .bb-btn .global-btn { padding: 8px 20px; white-space: normal; text-align: center; }
+      .bb-quote-1, .bb-quote-2 { width: min(120px, 20vw); }
+      .typing-text { white-space: normal; animation: none; border-right: none; }
+    }
+    @media (max-width: 480px) {
+      .bb-arrow-label { display: none; }
+      .bb-links { justify-content: center; }
+      .bb-card p { font-size: 1rem; }
+      .bb-author { font-size: 0.75rem; }
+      .bb-name { font-size: 2rem; }
+    }

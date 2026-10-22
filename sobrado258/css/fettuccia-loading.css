@@ -1,0 +1,307 @@
+/* ============================================
+   FETTUCCIA LOADING v1.0 - NAMESPACE SEGURO
+   Com imagem de fundo difusa e novos textos
+   ============================================ */
+
+.fettuccia-lp-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* IMAGEM DE FUNDO DIFUSA DO IMÓVEL */
+.fettuccia-lp-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.fettuccia-lp-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: blur(0px) brightness(0.4) saturate(0.7);
+    transform: scale(1.05);
+}
+
+.fettuccia-lp-bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 8, 16, 0.6);
+    pointer-events: none;
+}
+
+/* FUNDO AZUL MARINHO (fallback) */
+.fettuccia-lp-ocean-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(10, 42, 58, 0.178) 0%, rgba(5, 22, 31, 0.404) 50%, rgba(2, 8, 16, 0.342) 100%);
+    z-index: 1;
+}
+
+/* CANVAS DAS PARTÍCULAS */
+.fettuccia-lp-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* CONTEÚDO CENTRAL */
+.fettuccia-lp-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* NOME DO EMPREENDIMENTO */
+.fettuccia-lp-empreendimento {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(202, 162, 86, 0.9);
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: fettucciaLpFadeInUp 0.8s ease;
+}
+
+/* NOVO: TEXTO "BY ROBERTO FETTUCCIA" */
+.fettuccia-lp-by {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(202, 162, 86, 0.6);
+    margin-bottom: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    animation: fettucciaLpFadeInUp 0.8s ease 0.1s backwards;
+}
+
+/* WRAPPER DO LOGO */
+.fettuccia-lp-logo-wrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    z-index: 15;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+}
+
+.fettuccia-lp-logo-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(202, 162, 86, 0) 0%, rgba(202, 162, 86, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.fettuccia-lp-logo-wrapper--glow::after {
+    opacity: 1;
+}
+
+.fettuccia-lp-logo {
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(202, 161, 86, 0.753));
+    position: relative;
+    z-index: 16;
+}
+
+/* BARRA DE PROGRESSO */
+.fettuccia-lp-progress-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.fettuccia-lp-progress-bg {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100px;
+    height: 3px;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+}
+
+.fettuccia-lp-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #CAA256, #E8C87A, #CAA256);
+    border-radius: 100px;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 8px rgba(202, 162, 86, 0.5);
+}
+
+.fettuccia-lp-percentage {
+    font-family: 'Inter', monospace;
+    font-size: 0.9rem;
+    color: #CAA256;
+    margin-top: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* NOVO: TEXTO "EXCELÊNCIA ESTÁ NOS DETALHES" */
+.fettuccia-lp-slogan {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: rgba(202, 162, 86, 0.5);
+    margin-top: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    animation: fettucciaLpFadeInUp 0.8s ease 0.2s backwards;
+}
+
+/* EFEITO CORTINA */
+.fettuccia-lp-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #020810;
+    z-index: 100000;
+    pointer-events: none;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.fettuccia-lp-curtain--active {
+    transform: scaleY(1);
+}
+
+.fettuccia-lp-loading--hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.fettuccia-lp-logo-wrapper--fadeout {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+@keyframes fettucciaLpFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .fettuccia-lp-logo-wrapper {
+        width: 130px;
+        height: 130px;
+    }
+    .fettuccia-lp-logo {
+        width: 105px;
+    }
+    .fettuccia-lp-empreendimento {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+    }
+    .fettuccia-lp-by {
+        font-size: 0.6rem;
+        letter-spacing: 1.5px;
+    }
+    .fettuccia-lp-slogan {
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+    }
+}
+
+
+/* ============================================
+   AJUSTE DE DIFUSÃO DO FUNDO
+   ============================================ */
+
+/* 1. IMAGEM DE FUNDO - CONTROLE DO BLUR */
+.fettuccia-lp-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    
+    /* 🔥 AJUSTE A DIFUSÃO AQUI 🔥 */
+    filter: blur(1px) brightness(0.35) saturate(0.6);
+    /*       ↑ aumenta para mais difuso (ex: 20px)
+             ↓ diminui para menos difuso (ex: 4px) */
+    
+    transform: scale(1.05);
+}
+
+/* 2. OVERLAY ESCURO - CONTROLE DE OPACIDADE */
+.fettuccia-lp-bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 🔥 AJUSTE A ESCURIDÃO AQUI 🔥 */
+    background: rgba(2, 8, 16, 0.342);
+    /*       ↑ aumenta para mais escuro (ex: 0.85)
+             ↓ diminui para mais claro (ex: 0.4) */
+    
+    pointer-events: none;
+}
+
+/* 3. GRADIENTE AZUL MARINHO */
+.fettuccia-lp-ocean-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 🔥 AJUSTE A INTENSIDADE DO GRADIENTE AQUI 🔥 */
+    background: radial-gradient(ellipse at 30% 40%, 
+                rgba(10, 42, 58, 0.5) 0%, 
+                rgba(5, 22, 31, 0.7) 50%, 
+                rgba(2, 8, 16, 0.664) 100%);
+    
+    z-index: 1;
+}

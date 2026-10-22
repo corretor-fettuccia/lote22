@@ -1,0 +1,62 @@
+/* ========== CSS DO PLUGIN ========== */
+    .carroselbackground {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .carroselbackground__stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .carroselbackground__slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity var(--cb-speed, 1.2s) ease-in-out;
+      will-change: opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    .carroselbackground__slide--active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .carroselbackground__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--cb-position, center center);
+      transform: scale(var(--cb-scale, 1.02));
+      transition: transform var(--cb-speed, 1.2s) ease-out;
+      pointer-events: none;
+    }
+    .carroselbackground__image--blur {
+      filter: blur(var(--cb-blur, 4px));
+    }
+    .carroselbackground__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: var(--cb-blend-mode, normal);
+    }
+    .carroselbackground__content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .carroselbackground__slide { transition: opacity 0.001s; }
+    }

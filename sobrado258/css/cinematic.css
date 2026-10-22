@@ -1,0 +1,65 @@
+/* ===============================================
+       ████████  EFEITO PRINCIPAL - NAMESPACE ÚNICO  ████████
+       Tudo que começa com "cinematicmotion__" pertence exclusivamente ao efeito.
+    =============================================== */
+
+    /* Estados iniciais (ocultos, deslocados e com desfoque) */
+    .cinematicmotion__slide--left,
+    .cinematicmotion__slide--right {
+      opacity: 0;
+      filter: blur(10px);
+      transition: transform 1.85s cubic-bezier(0.2, 0.95, 0.4, 1.05),
+                  opacity 2.7s ease-out,
+                  filter 2.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+      will-change: transform, opacity, filter;
+      /* Garante que não crie scroll horizontal */
+      max-width: 100%;
+    }
+
+    /* Movimento a partir da ESQUERDA */
+    .cinematicmotion__slide--left {
+      transform: translateX(-140px);
+    }
+
+    /* Movimento a partir da DIREITA */
+    .cinematicmotion__slide--right {
+      transform: translateX(140px);
+    }
+
+    /* Estado ATIVO (quando visível em 20% da tela) */
+    .cinematicmotion__slide--left.active,
+    .cinematicmotion__slide--right.active {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+      transition: transform 1.85s cubic-bezier(0.2, 0.95, 0.4, 1.05),
+                  opacity 1.7s ease-out,
+                  filter 1.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+    }
+
+    /* Ajuste para mobile: menor deslocamento, mantém suavidade */
+    @media (max-width: 768px) {
+      .cinematicmotion__slide--left {
+        transform: translateX(-60px);
+      }
+      .cinematicmotion__slide--right {
+        transform: translateX(60px);
+      }
+      .cinematicmotion__slide--left.active,
+      .cinematicmotion__slide--right.active {
+        transform: translateX(0);
+      }
+    }
+
+    /* Suporte a prefers-reduced-motion (acessibilidade) */
+    @media (prefers-reduced-motion: reduce) {
+      .cinematicmotion__slide--left,
+      .cinematicmotion__slide--right,
+      .cinematicmotion__slide--left.active,
+      .cinematicmotion__slide--right.active {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: blur(0) !important;
+      }
+    }
